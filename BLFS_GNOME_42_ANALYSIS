@@ -4,6 +4,7 @@
 # 'package-name' 'BLFS-Version' 'slackware-current-version' 'slackware-15.0-version' 'SBo-version'
 
 # LIBRARIES:
+amtk-5.3.2 -- -- -- --
 #gcr 3.41.0 3.40.0 3.40.0
 #gsettings-desktop-schemas 42.0 42.0 40.0
 #libsecret 0.20.5 0.20.5 0.20.4
