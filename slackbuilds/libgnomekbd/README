@@ -1,0 +1,7 @@
+libgnomekbd is Gnome keyboard library.
+
+Dependencies: 
+dconf,gtk3,libxklavier,gobject-introspection 
+  
+
+
