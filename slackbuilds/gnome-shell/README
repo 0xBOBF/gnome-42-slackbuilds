@@ -1,0 +1,6 @@
+GNOME Shell provides core user interface functions for the GNOME desktop.
+ 
+ Required:
+evolution-data-server-3.44.0, Gjs-1.72.0, gnome-autoar-0.4.3, gnome-control-center-42.0, GTK-4.6.2, Mutter-42.0, sassc-3.6.2, startup-notification-0.12, elogind-246.10 
+Optional:
+blocaled-0.4,asciidoc-10.1.4, desktop-file-utils-0.26, gnome-bluetooth-42.0, gst-plugins-base-1.20.1,NetworkManager-1.36.4

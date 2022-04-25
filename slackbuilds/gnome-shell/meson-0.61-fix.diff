@@ -1,0 +1,50 @@
+diff --git a/data/meson.build b/data/meson.build
+index f924fdf8061a26ad62863b4cc91fc75681cf667c..76ae45c93a9671cf11c13d0da8b55de889f1cae7 100644
+--- a/data/meson.build
++++ b/data/meson.build
+@@ -16,7 +16,7 @@ desktopconf.set('bindir', bindir)
+ desktopconf.set('systemd_hidden', have_systemd ? 'true' : 'false')
+ 
+ foreach desktop_file : desktop_files
+-  i18n.merge_file('desktop',
++  i18n.merge_file(
+     input: configure_file(
+       input: desktop_file + '.in.in',
+       output: desktop_file + '.in',
+diff --git a/subprojects/extensions-app/data/meson.build b/subprojects/extensions-app/data/meson.build
+index d7e7d4001c1853d4655a44ddaea676df297f038c..4b601e8bd1a4472c96b4be8cbbd954d49fe7b94b 100644
+--- a/subprojects/extensions-app/data/meson.build
++++ b/subprojects/extensions-app/data/meson.build
+@@ -14,7 +14,7 @@ desktopconf.set('bindir', bindir)
+ desktopconf.set('app_id', app_id)
+ desktopconf.set('prgname', prgname)
+ 
+-i18n.merge_file('desktop',
++i18n.merge_file(
+   input: configure_file(
+     input: base_id + '.desktop.in.in',
+     output: desktop_file + '.in',
+diff --git a/subprojects/extensions-app/data/metainfo/meson.build b/subprojects/extensions-app/data/metainfo/meson.build
+index c4962c0576d65775db01bfe791d2674ff11c2c1b..a19bfa80a457f503f6fa5e3e358832ccd0356a20 100644
+--- a/subprojects/extensions-app/data/metainfo/meson.build
++++ b/subprojects/extensions-app/data/metainfo/meson.build
+@@ -1,5 +1,5 @@
+ metainfo = app_id + '.metainfo.xml'
+-i18n.merge_file(metainfo,
++i18n.merge_file(
+   input: base_id + '.metainfo.xml.in',
+   output: metainfo,
+   po_dir: po_dir,
+diff --git a/subprojects/extensions-tool/src/templates/meson.build b/subprojects/extensions-tool/src/templates/meson.build
+index 670e2bf448fa4087c7d1884353c9cf9ce075b5f5..d693bfaddb67067b0914ec247b457f7071e7cc9c 100644
+--- a/subprojects/extensions-tool/src/templates/meson.build
++++ b/subprojects/extensions-tool/src/templates/meson.build
+@@ -4,7 +4,7 @@ template_metas = [
+ ]
+ template_deps = []
+ foreach template : template_metas
+-  template_deps += i18n.merge_file(template,
++  template_deps += i18n.merge_file(
+     input: template + '.in',
+     output: template,
+     po_dir: po_dir,
