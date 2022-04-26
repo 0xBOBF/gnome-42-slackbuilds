@@ -1,0 +1,15 @@
+THIS IS A WORK IN PROGRESS. DONT BOTHER FOLLOWING THIS FOR NOW, UNLESS YOU ARE TESTING THE INITIAL BUILD STEPS.
+
+Create the avahi and colord users and groups:
+
+ groupadd -g 214 avahi
+ useradd -u 214 -g 214 -c "Avahi User" -d /dev/null -s /bin/false avahi
+
+ groupadd -g 303 colord
+ useradd -d /var/lib/colord -u 303 -g colord -s /bin/false colord
+
+Start with this queue and sqg will fill in any deps here:
+
+ sqg -p "totem-pl-parser gnome-autoar avahi libchamplain libpeas evolution-data-server telepathy-glib tracker exempi libgxps gsound libportal zenity libgusb colord-gtk yelp brasero gspell gtksourceview4 appstream-glib gtk-vnc jq p7zip" -o gnome-42-pre
+
+ sbopkg -i gnome-42-pre

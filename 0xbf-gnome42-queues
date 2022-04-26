@@ -1,0 +1,49 @@
+# This file is a work in progress. Please do not touch it.
+
+# The following *should* build all the initial packages needed for gnome, from slackbuilds.org:
+sqg -p "totem-pl-parser gnome-autoar avahi libchamplain libpeas evolution-data-server telepathy-glib tracker exempi libgxps gsound libportal zenity libgusb colord-gtk yelp brasero gspell gtksourceview4 appstream-glib gtk-vnc jq p7zip"
+
+# The remaining packages will need to be installed in roughly this order:
+amtk
+gnome-desktop 42.0 - - 41.1
+gnome-video-effects 0.5.0 - - -
+grilo 0.3.14 - - -
+dbusmock 0.27.5 - - -
+folks 0.15.5 - - -
+gfbgraph 0.2.5 - - -
+libgrss 0.7.0 - - -
+tracker-miners 3.3.0 - - -
+
+gnome-backgrounds 42.0 - - -
+nautilus 42.1.1 - - -
+gnome-bluetooth 42.0 - - 3.20.1
+gnome-settings-daemon 42.1 - - -
+clutter-gst 3.0.27 - - -
+cheese 41.1 - - -
+gnome-control-center 42.0 - - -
+libxcvt 0.1.1 - - -
+mutter 42.0 - - -
+gnome-shell 42.0 - - -
+gnome-shell-extensions 42.0 - - -
+gnome-session 42.0 - - -              
+gdm 42.0 - - -
+gnome-user-docs 42.0 - - -
+
+baobab 42.0 - - -
+eog 42.0 - - -
+evince 42.2 - - 41.3
+seahorse 41.0 - - 3.18.0
+evolution 3.44.1 - - -
+file-roller 3.42 - - 3.36.2
+gnome-calculator 42.0 - - -
+gnome-color-manager 3.36.0 - - -
+gnome-disk-utility 42.0 - - 3.38.2
+gnome-maps 42.1 - - -
+gnome-nettool 42.0 - - -
+gnome-power-manager 3.32.0 - - -
+gnome-system-monitor 42.0 - - -
+gnome-tweaks 40.0 - - -
+gnome-weather 42.0 - - -
+vinagre 3.22.0 - - -
+
+chrome-gnome-shell - - -
