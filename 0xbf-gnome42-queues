@@ -3,6 +3,10 @@
 # The following *should* build all the initial packages needed for gnome, from slackbuilds.org:
 sqg -p "totem-pl-parser gnome-autoar avahi libchamplain libpeas evolution-data-server telepathy-glib tracker exempi libgxps gsound libportal zenity libgusb colord-gtk yelp brasero gspell gtksourceview4 appstream-glib gtk-vnc jq p7zip"
 
+# NOTE: Some deps get listed twice in the sqg queue file with the above command. Therefore it would be best
+# to edit the queue file in /var/lib/sbopkg/queues/ to remove duplicates before running sbopkg on it (we def
+# dont want to build webkit2gtk twice ;-) )
+
 # The remaining packages will need to be installed in roughly this order:
 amtk
 gnome-desktop 42.0 - - 41.1
