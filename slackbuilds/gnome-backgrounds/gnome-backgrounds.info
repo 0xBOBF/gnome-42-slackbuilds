@@ -1,6 +1,6 @@
 PRGNAM="gnome-backgrounds"
 VERSION="42.0"
-HOMEPAGE="https://gitlab.gnome.org/GNOME"
+HOMEPAGE="https://gitlab.gnome.org/GNOME/gnome-backgrounds"
 DOWNLOAD="UNSUPPORTED"
 MD5SUM="UNSUPPORTED"
 DOWNLOAD_x86_64="https://download.gnome.org/sources/gnome-backgrounds/42/gnome-backgrounds-42.0.tar.xz"
