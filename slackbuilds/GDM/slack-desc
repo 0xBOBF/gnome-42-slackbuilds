@@ -6,8 +6,9 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
    |-----handy-ruler------------------------------------------------------|
-gdm: GNOME Display Manager
+gdm: gdm (GNOME Display Manager)
 gdm:
-gdm: The GNOME Display Manager (GDM) is a program that manages graphical
-gdm: display servers and handles graphical user logins.
+gdm: GDM is a system service that is responsible for providing graphical 
+gdm: logins and managing local and remote displays. 
 gdm:
+gdm: Homepage: https://gitlab.gnome.org/GNOME/gdm
