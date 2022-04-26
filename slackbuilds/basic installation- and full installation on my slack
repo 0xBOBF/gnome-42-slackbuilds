@@ -9,10 +9,6 @@ avahi
 bash-completion
 bubblewrap 	
 chrome-gnome-shell 	
-clutter-gst 	
-clutter-gtk 	
-clutter 	
-cogl 	
 colord-gtk 	
 colord 	
 eog 	
