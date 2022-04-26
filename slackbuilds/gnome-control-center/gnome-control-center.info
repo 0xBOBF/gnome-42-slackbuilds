@@ -1,0 +1,12 @@
+PRGNAM="gnome-control-center"
+VERSION="42.1"
+HOMEPAGE="https://gitlab.gnome.org/GNOME/gnome-control-center"
+DOWNLOAD="UNSUPPORTED"
+MD5SUM="UNSUPPORTED"
+DOWNLOAD_x86_64="https://download.gnome.org/sources/gnome-control-center/42/gnome-control-center-42.1.tar.xz"
+MD5SUM_x86_64="cfa5ea72a2bd9a7385120d0cf577b195"
+REQUIRES="%README%"
+MAINTAINER="Anagnostakis Ioannis"
+EMAIL="rizitis@gmail.com"
+
+ 
