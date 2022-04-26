@@ -1,0 +1,13 @@
+REQUIRES:
+    
+    egl-wayland 
+    gi-docgen 
+    gobject-introspection 
+    meson 
+    sysprof 
+    wayland-protocols 
+    xorg-server 
+    python-dbusmock 
+    wireplumber
+    xorg-server-xvfb 
+
