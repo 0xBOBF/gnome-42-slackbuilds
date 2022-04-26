@@ -65,8 +65,8 @@ libxcvt 0.1.1 - - -
 mutter 42.0 - - -
 gnome-shell 42.0 - - -
 gnome-shell-extensions 42.0 - - -
-gnome-session 42.0 - - -
-gdm 42.0 - - -
+gnome-session 42.0 - - -              
+gdm 42.0 - - -              # GDM is now updated to SBo standards. Still needs a full build test against 42 (and someone else should verify all the files).
 gnome-user-docs 42.0 - - -
 yelp 42.1 - - 42.1
 
