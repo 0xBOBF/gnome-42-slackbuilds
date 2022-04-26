@@ -11,9 +11,9 @@ sqg -p "totem-pl-parser gnome-autoar avahi libchamplain libpeas evolution-data-s
 
 # The remaining packages will need to be installed in roughly this order:
 amtk
-gnome-desktop 42.0 - - 41.1
-gnome-video-effects 0.5.0 - - -
-grilo 0.3.14 - - -
+gnome-desktop 42.0 - - 41.1 # Done
+gnome-video-effects 0.5.0 - - - # Done
+grilo 0.3.14 - - -  # Done
 folks 0.15.5 - - - ### UP TO HERE. FOLKS F.T.B. Going to leave for now and try later in the build, like gnome 41 did.
 gfbgraph 0.2.5 - - -
 libgrss 0.7.0 - - -
