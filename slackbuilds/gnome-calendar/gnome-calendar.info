@@ -1,4 +1,4 @@
-PRGNAM="gnome-calendar-42.0.tar.xz"
+PRGNAM="gnome-calendar"
 VERSION="42.0"
 HOMEPAGE="https://gitlab.gnome.org/GNOME/gnome-calendar"
 DOWNLOAD="UNSUPPORTED"
