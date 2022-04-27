@@ -1,0 +1,6 @@
+Baobab is the GNOME Disk Usage Analyzer
+
+Note: After installation if you try to run Baobab maybe
+you got an error "Settings schema 'org.gnome.baobab.ui' is not installed"
+ To fix it as root command # /usr/bin/glib-compile-schemas /usr/share/glib-2.0/schemas/
+ After that, baobab is ready for use.
