@@ -15,5 +15,5 @@ libadwaita: complementing GTK. For GTK 3 this role has increasingly been played
 libadwaita: by Libhandy, and so Libadwaita is a direct Libhandy successor.
 libadwaita:
 libadwaita: 
-libadwaita: https://blogs.gnome.org/alexm/2021/12/31/libadwaita-1-0/
+libadwaita: https://gitlab.gnome.org/GNOME/libadwaita 
 libadwaita:

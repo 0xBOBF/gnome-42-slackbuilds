@@ -3,7 +3,6 @@
 # Slackware build script for gnome-shell-42.0.tar.xz
 
 # Copyright 2016, 2021 Rafael Tavares (mdrafaeltavares@gmail.com) Bahia, Brazil.
-# Optional Bluetooth patch by Leio from Gentoo
 # Modified by Ioannis Anagnostakis <rizitis@gmail.com> GR (2022)
 # All rights reserved.
 #
@@ -76,10 +75,6 @@ rm -rf $PRGNAM-$VERSION
 tar xvf $CWD/$PRGNAM-$VERSION.tar.xz
 cd $PRGNAM-$VERSION
 
-
-#patch -p1 -i $CWD/40.0-optional-bluetooth.patch
-#patch -p1 -i $CWD/meson-0.61-fix.diff
-
 mkdir build
 cd build
   CFLAGS="$SLKCFLAGS" \
@@ -98,7 +93,6 @@ meson .. \
  -Dtests=false \
  -Dsystemd=false
 
-
   "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
 cd ..
@@ -107,8 +101,6 @@ rm -f $PKG/{,usr/}lib${LIBDIRSUFFIX}/*.la
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
-
-
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc

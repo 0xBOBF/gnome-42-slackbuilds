@@ -62,13 +62,13 @@ clutter-gst 3.0.27 - - -                            # Done - gnome-42-slackbuild
 cheese 41.1 - - -                                   # Done - gnome-42-slackbuilds
 gnome-control-center 42.0 - - -                     # Done - gnome-42-slackbuilds (note: requires a newer gtk4 in slackware, and a rebuild of libnma to support gtk4).
    
-libxcvt 0.1.1 - - -
-mutter 42.0 - - -
-gnome-shell 42.0 - - -
-gnome-shell-extensions 42.0 - - -
-gnome-session 42.0 - - -              
-gdm 42.0 - - -              # GDM is now updated to SBo standards. Still needs a full build test against 42 (and someone else should verify all the files).
-gnome-user-docs 42.0 - - -
+#libxcvt 0.1.1 - - -                                # Skipped - Was supposed to beused by mutter, but mutter built fine without it.
+mutter 42.0 - - -                                   # Done - gnome-42-slackbuilds
+gnome-shell 42.0 - - -                              # Done - gnome-42-slackbuilds (note: Needs upgraded gjs in slackware-current, and gjs needs mozjs91... thanks snuk!)
+gnome-shell-extensions 42.0 - - -                   # Done - gnome-42-slackbuilds
+gnome-session 42.0 - - -                            # Done - gnome-42-slackbuilds
+gdm 42.0 - - -                                      # Done - gnome-42-slackbuilds 
+gnome-user-docs 42.0 - - -                          # Done - gnome-42-slackbuilds
 yelp 42.1 - - 42.1                                  # Done - SBo
 
 # GNOME 42 APPLICATIONS

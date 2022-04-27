@@ -1,2 +1,1 @@
-Adwaita
-Building blocks for modern GNOME applications.
+The libadwaita package provides additional GTK4 UI widgets for use in developing user interfaces. It is used primarily for GNOME applications. 
