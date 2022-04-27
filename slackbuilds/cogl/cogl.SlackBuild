@@ -1,11 +1,8 @@
 #!/bin/bash
 
-# Slackware build script for cheese
+# Slackware build script for cogl
 
-# Copyright 2016,2021 Rafael Tavares (mdrafaeltavares@gmail.com) Bahia, Brazil.
-# Based on Linux From Scratch online book (Thanks!!!):
-# https://www.linuxfromscratch.org/blfs/view/svn/gnome/cheese.html
-# Modified by Ioannis Anagnostakis <rizitis@gmail.com> GR (2022)
+# Copyright 2022 Ozan Türkyılmaz
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -25,29 +22,25 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-
-
 cd $(dirname $0) ; CWD=$(pwd)
 
-PRGNAM=cheese
-VERSION=${VERSION:-41.1}
-BUILD=${BUILD:-1}
+PRGNAM=cogl
+VERSION=${VERSION:-1.22.8}
+BUILD=${BUILD:-2}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
 
-# Automatically determine the architecture we're building on:
+GTKDOC=${GTKDOC:-no}
+INTROSPECTION=${INTROSPECTION:-no}
+
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
     i?86) ARCH=i586 ;;
     arm*) ARCH=arm ;;
-    # Unless $ARCH is already set, use uname -m for all other archs:
        *) ARCH=$( uname -m ) ;;
   esac
 fi
 
-# If the variable PRINT_PACKAGE_NAME is set, then this script will report what
-# the name of the created package would be, and then exit. This information
-# could be useful to other scripts.
 if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
   echo "$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE"
   exit 0
@@ -71,7 +64,7 @@ else
   LIBDIRSUFFIX=""
 fi
 
-set -e # Exit on most errors
+set -e
 
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
@@ -79,58 +72,81 @@ cd $TMP
 rm -rf $PRGNAM-$VERSION
 tar xvf $CWD/$PRGNAM-$VERSION.tar.xz
 cd $PRGNAM-$VERSION
+
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
   -o -perm 511 \) -exec chmod 755 {} \; -o \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
-  
-mkdir build
-cd build
-  CFLAGS="$SLKCFLAGS" \
+
+# For some reason the configure switch will not completely disable
+# tests being built
+sed -e "s/^\(SUBDIRS =.*\)test-fixtures\(.*\)$/\1\2/" \
+ -e "s/^\(SUBDIRS +=.*\)tests\(.*\)$/\1\2/" \
+ -e "s/^\(.*am__append.* \)tests\(.*\)$/\1\2/" \
+ -i Makefile.am Makefile.in || false
+
+CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
-meson .. \
+./configure \
  --prefix=/usr \
- --buildtype=release \
- --libdir=lib${LIBDIRSUFFIX} \
- --sysconfdir=/etc \
- --infodir=/usr/info \
+ --libdir=/usr/lib${LIBDIRSUFFIX} \
  --mandir=/usr/man \
- --localstatedir=/var \
- -Ddefault_library=shared \
- -Dtests=false \
- -Dintrospection=true \
- -Dgtk_doc=true \
- -Dman=true
-  "${NINJA:=ninja}"
-  DESTDIR=$PKG $NINJA install
-cd ..
+ --docdir=/usr/doc/$PRGNAM-$VERSION \
+ --enable-installed-tests=no \
+ --enable-emscripten=no \
+ --enable-standalone=no \
+ --enable-debug=no \
+ --enable-unit-tests=no \
+ --enable-cairo=yes\
+ --enable-profile=no \
+ --enable-maintainer-flags=no \
+ --enable-deprecated=yes \
+ --enable-glib=yes \
+ --enable-cogl-pango=yes \
+ --enable-cogl-gst=yes \
+ --enable-cogl-path=yes \
+ --enable-gdk-pixbuf=yes \
+ --enable-quartz-image=no \
+ --enable-examples-install=no \
+ --enable-gles1=yes \
+ --enable-gles2=yes \
+ --enable-gl=yes \
+ --enable-cogl-gles2=yes \
+ --enable-glx=yes \
+ --enable-wgl=auto \
+ --enable-sdl=no \
+ --enable-sdl2=no \
+ --enable-null-egl-platform=no \
+ --enable-gdl-egl-platform=no \
+ --enable-wayland-egl-platform=yes \
+ --enable-kms-egl-platform=yes \
+ --enable-wayland-egl-server=yes \
+ --enable-android-egl-platform=no \
+ --enable-mir-egl-platform=no \
+ --enable-xlib-egl-platform=yes \
+ --enable-introspection=yes \
+ --disable-static \
+ --disable-glibtest \
+ --build=$ARCH-slackware-linux
 
+make
+make install -j1 DESTDIR=$PKG
 
+rm -f $PKG/{,usr/}lib${LIBDIRSUFFIX}/*.la
 
-# Strip binaries and libraries 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
-# Compress man pages
-find $PKG/usr/man -type f -exec gzip -9 {} \;
-for i in $( find $PKG/usr/man -type l ) ; do ln -s $( readlink $i ).gz $i.gz ; rm $i ; done
-
-# Copy program documentation into the package
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a AUTHORS COPYING ChangeLog* NEWS README \
+cp -a \
+  ABOUT-NLS COPYING ChangeLog NEWS README \
   $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
-# Copy the slack-desc (and a custom doinst.sh if necessary) into ./install
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
-cat $CWD/doinst.sh > $PKG/install/doinst.sh
 
-# Make the package; be sure to leave it in $OUTPUT
-# If package symlinks need to be created during install *before*
-# your custom contents of doinst.sh runs, then add the -p switch to
-# the makepkg command below -- see makepkg(8) for details
 cd $PKG
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE

@@ -27,8 +27,8 @@ xdg-dbus-proxy - - - 0.1.2                          # Done - SBo
 webkit2gtk 2.36.1 - - 2.36.0                        # Done - SBo
 gnome-online-accounts 3.44.0 - - 3.43.1             # Done - SBo
 grilo 0.3.14 - - -                                  # Done - gnome-42-slackbuilds
-cogl 1.22.8 - - 1.22.8                              # Done - SBo
-clutter 1.26.4 - - 1.26.4                           # Done - SBo
+cogl 1.22.8 - - 1.22.8                              # Done - SBo (The SBo build has incorrect build options and needs corrections sent to the maintainer).
+clutter 1.26.4 - - 1.26.4                           # Done - SBo (The SBo build has incorrect build options and needs corrections sent to the maintainer).
 clutter-gtk 1.8.4 - - 1.8.4                         # Done - SBo 
 libchamplain 0.12.20 - - 0.12.20                    # Done - SBo (emailed maintainer to fix)
 libgdata 0.18.1 - - 0.18.1                          # Done - SBo (emailed maintainer to fix)
@@ -59,7 +59,7 @@ gnome-settings-daemon 42.1 - - -                    # Done - gnome-42-slackbuild
 colord-gtk 0.3.0 - - 0.2.0                          # Done - SBo
 clutter-gtk 1.8.4 - - 1.8.4                         # Done - SBo
 clutter-gst 3.0.27 - - -                            # Done - SBo
-cheese 41.1 - - -
+cheese 41.1 - - -                                   # Done - gnome-42-slackbuilds
 gnome-control-center 42.0 - - -
 libxcvt 0.1.1 - - -
 mutter 42.0 - - -
@@ -68,7 +68,7 @@ gnome-shell-extensions 42.0 - - -
 gnome-session 42.0 - - -              
 gdm 42.0 - - -              # GDM is now updated to SBo standards. Still needs a full build test against 42 (and someone else should verify all the files).
 gnome-user-docs 42.0 - - -
-yelp 42.1 - - 42.1
+yelp 42.1 - - 42.1                                  # Done - SBo
 
 # GNOME 42 APPLICATIONS
 baobab 42.0 - - -
@@ -83,7 +83,7 @@ gtksourceview5 5.4.1 - - - # Has gtksourceview4 4.8.1
 gnome-calculator 42.0 - - -
 gnome-color-manager 3.36.0 - - -
 gnome-disk-utility 42.0 - - 3.38.2
-appstream-glib - - - 0.7.18 # Dep: 'gcab', also on SBo
+appstream-glib - - - 0.7.18                         # Done - SBo
 gnome-maps 42.1 - - -
 gnome-nettool 42.0 - - -
 gnome-power-manager 3.32.0 - - -

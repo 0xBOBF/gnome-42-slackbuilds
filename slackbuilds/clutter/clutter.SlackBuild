@@ -1,11 +1,8 @@
 #!/bin/bash
 
-# Slackware build script for cheese
+# Slackware build script for clutter
 
-# Copyright 2016,2021 Rafael Tavares (mdrafaeltavares@gmail.com) Bahia, Brazil.
-# Based on Linux From Scratch online book (Thanks!!!):
-# https://www.linuxfromscratch.org/blfs/view/svn/gnome/cheese.html
-# Modified by Ioannis Anagnostakis <rizitis@gmail.com> GR (2022)
+# Copyright 2022 Ozan Türkyılmaz
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -25,29 +22,26 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-
-
 cd $(dirname $0) ; CWD=$(pwd)
 
-PRGNAM=cheese
-VERSION=${VERSION:-41.1}
+PRGNAM=clutter
+VERSION=${VERSION:-1.26.4}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
 
-# Automatically determine the architecture we're building on:
+GCOV=${GCOV:-no}
+INTROSPECTION=${INTROSPECTION:-no}
+GTKDOC=${GTKDOC:-no}
+
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
     i?86) ARCH=i586 ;;
     arm*) ARCH=arm ;;
-    # Unless $ARCH is already set, use uname -m for all other archs:
        *) ARCH=$( uname -m ) ;;
   esac
 fi
 
-# If the variable PRINT_PACKAGE_NAME is set, then this script will report what
-# the name of the created package would be, and then exit. This information
-# could be useful to other scripts.
 if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
   echo "$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE"
   exit 0
@@ -71,7 +65,7 @@ else
   LIBDIRSUFFIX=""
 fi
 
-set -e # Exit on most errors
+set -e
 
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
@@ -85,52 +79,53 @@ find -L . \
   -o -perm 511 \) -exec chmod 755 {} \; -o \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
-  
-mkdir build
-cd build
-  CFLAGS="$SLKCFLAGS" \
+
+CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
-meson .. \
+./configure \
  --prefix=/usr \
- --buildtype=release \
- --libdir=lib${LIBDIRSUFFIX} \
+ --libdir=/usr/lib${LIBDIRSUFFIX} \
  --sysconfdir=/etc \
- --infodir=/usr/info \
- --mandir=/usr/man \
  --localstatedir=/var \
- -Ddefault_library=shared \
- -Dtests=false \
- -Dintrospection=true \
- -Dgtk_doc=true \
- -Dman=true
-  "${NINJA:=ninja}"
-  DESTDIR=$PKG $NINJA install
-cd ..
+ --docdir=/usr/doc/$PRGNAM-$VERSION \
+ --enable-x11-backend=yes \
+ --enable-win32-backend=no \
+ --enable-quartz-backend=check \
+ --enable-gdk-backend=yes \
+ --enable-wayland-backend=yes \
+ --enable-egl-backend=yes \
+ --enable-mir-backend=no \
+ --enable-cex100-backend=no \
+ --enable-tslib-input=no \
+ --enable-evdev-input=yes \
+ --enable-wayland-compositor=yes \
+ --enable-xinput=yes \
+ --enable-gdk-pixbuf=yes \
+ --enable-debug=no \
+ --enable-deprecated=yes \
+ --enable-maintainer-flags=no \
+ --enable-gcov=no \
+ --enable-introspection=yes \
+ --with-x \
+ --disable-static \
+ --build=$ARCH-slackware-linux
 
+make
+make install DESTDIR=$PKG
 
+rm -f $PKG/{,usr/}lib${LIBDIRSUFFIX}/*.la
 
-# Strip binaries and libraries 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
-# Compress man pages
-find $PKG/usr/man -type f -exec gzip -9 {} \;
-for i in $( find $PKG/usr/man -type l ) ; do ln -s $( readlink $i ).gz $i.gz ; rm $i ; done
-
-# Copy program documentation into the package
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a AUTHORS COPYING ChangeLog* NEWS README \
+cp -a \
+  ABOUT-NLS CONTRIBUTING.md COPYING ChangeLog NEWS README.md \
   $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
-# Copy the slack-desc (and a custom doinst.sh if necessary) into ./install
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
-cat $CWD/doinst.sh > $PKG/install/doinst.sh
 
-# Make the package; be sure to leave it in $OUTPUT
-# If package symlinks need to be created during install *before*
-# your custom contents of doinst.sh runs, then add the -p switch to
-# the makepkg command below -- see makepkg(8) for details
 cd $PKG
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE

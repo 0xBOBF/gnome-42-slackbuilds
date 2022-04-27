@@ -1,4 +1,12 @@
-Cheese:
-Take photos and videos with your webcam, with fun graphical effects
+Cheese is used to take photos and videos with fun graphical effects. 
 
+Required Dependencies:
+- clutter-gst
+- clutter-gtk
+- gnome-desktop
+- gnome-video-effects (for video effects at runtime)
 
+Optional Dependencies:
+- appstream-glib
+- LCOV
+- Nautilus SendTo
