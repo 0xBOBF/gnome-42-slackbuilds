@@ -1,2 +1,10 @@
 This is the Eye of GNOME, an image viewer program.  
 It is meant to bea fast and functional image viewer.
+
+Required dependencies:
+- exempi
+- gnome-desktop
+- libpeas
+
+Optional dependencis
+- libportal

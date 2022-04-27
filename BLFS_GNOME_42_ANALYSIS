@@ -72,12 +72,12 @@ gnome-user-docs 42.0 - - -                          # Done - gnome-42-slackbuild
 yelp 42.1 - - 42.1                                  # Done - SBo
 
 # GNOME 42 APPLICATIONS
-baobab 42.0 - - -
-brasero 3.12.3 - - 3.12.3
-eog 42.0 - - -
-gspell 1.10.0 - - 1.9.1
-evince 42.2 - - 41.3
-seahorse 41.0 - - 3.18.0
+baobab 42.0 - - -                                   # Done - gnome-42-slackbuilds
+brasero 3.12.3 - - 3.12.3                           # Done - SBo
+eog 42.0 - - -                                      # Done - gnome-42-slackbuilds
+gspell 1.10.0 - - 1.9.1                             # Done - SBo
+evince 42.2 - - 41.3                                # Skipped - SBo build fails
+seahorse 41.0 - - 3.18.0                            # Done - SBo (Using older version for now)
 evolution 3.44.1 - - -
 file-roller 3.42 - - 3.36.2
 gtksourceview5 5.4.1 - - - # Has gtksourceview4 4.8.1
