@@ -52,15 +52,16 @@ libhandy 1.6.2 - - 1.5.0                            # Done - SBo
 libportal 0.6 - - 0.3                               # Done - SBo (Manually upgraded to 0.6 and fixed the slackbuild, will add to gnome-42-slackbuilds for now). Note: Need > 0.5 for nautilus to build.
 nautilus 42.1.1 - - -                               # Done - gnome-42-slackbuilds
 zenity 3.42.0 - - 3.42.0                            # Done - SBo
-gnome-bluetooth 42.0 - - 3.20.1                     # Done - SBo (Using a rather old version, but we will see...)
+gnome-bluetooth 42.0 - - 3.20.1                     # Done - gnome-42-slackbuilds (note: requires patch and a newer upower version in slackware)
 libgusb 0.3.10 - - 0.3.10                           # Done - SBo
 colord 1.4.6 - - 1.4.6                              # Done - SBo
-gnome-settings-daemon 42.1 - - -                    # Done - gnome-42-slackbuilds
-colord-gtk 0.3.0 - - 0.2.0                          # Done - SBo
+gnome-settings-daemon 42.1 - - -                    # Done - gnome-42-slackbuilds 
+colord-gtk 0.3.0 - - 0.2.0                          # Done - SBo (updated the version on SBo to 0.3.0 and added gtk4 support, otherwise gnome-control-center fails)
 clutter-gtk 1.8.4 - - 1.8.4                         # Done - SBo
 clutter-gst 3.0.27 - - -                            # Done - gnome-42-slackbuilds
 cheese 41.1 - - -                                   # Done - gnome-42-slackbuilds
-gnome-control-center 42.0 - - -
+gnome-control-center 42.0 - - -                     # Done - gnome-42-slackbuilds (note: requires a newer gtk4 in slackware, and a rebuild of libnma to support gtk4).
+   
 libxcvt 0.1.1 - - -
 mutter 42.0 - - -
 gnome-shell 42.0 - - -

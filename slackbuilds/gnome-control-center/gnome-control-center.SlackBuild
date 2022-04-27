@@ -26,7 +26,7 @@
 PRGNAM=gnome-control-center
 VERSION=${VERSION:-42.1}
 BUILD=${BUILD:-1}
-TAG=${TAG:-_SBo}		# the "_SBo" is required
+TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
 
 if [ -z "$ARCH" ]; then
@@ -67,8 +67,8 @@ tar xfv $CWD/$PRGNAM-$VERSION.tar.xz
 cd $PRGNAM-$VERSION
 
 # libgnome-volume-control subproject can be builded with shared library and alsa.
-sed -i "s#'static=true',#'static=false','pkglibdir=/usr/lib${LIBDIRSUFFIX}',#" meson.build
-sed -i 's/alsa=false/alsa=true/' meson.build
+#sed -i "s#'static=true',#'static=false','pkglibdir=/usr/lib${LIBDIRSUFFIX}',#" meson.build
+#sed -i 's/alsa=false/alsa=true/' meson.build
 
 mkdir -p build
 cd build
@@ -85,19 +85,8 @@ meson .. \
  --mandir=/usr/man \
  --localstatedir=/var \
  -Ddefault_library=shared \
- -Dcheese=false \
  -Dtests=false \
- -Dmalcontent=false \
  -Ddocumentation=true
-
-# -Dcheese=true \
-# -Dibus=true \
-# -Dprivileged_group=wheel \
-# -Dsnap=false \
-# -Dtests=false \
-# -Dtracing=false \
-# -Dwayland=true \
-# -Dprofile=default \
 
 ninja $JOBS || ninja
 DESTDIR=$PKG ninja install
