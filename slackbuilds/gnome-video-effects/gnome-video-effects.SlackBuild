@@ -46,7 +46,7 @@ if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
 fi
 
 CWD=$(pwd)
-TMP=${TMP:-/tmp/gfs}
+TMP=${TMP:-/tmp/SBo}
 PKG=$TMP/pkg-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 JOBS=${JOBS:-" -j$(expr $(getconf _NPROCESSORS_ONLN) \* 2 ) "}
