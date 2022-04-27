@@ -58,7 +58,7 @@ colord 1.4.6 - - 1.4.6                              # Done - SBo
 gnome-settings-daemon 42.1 - - -                    # Done - gnome-42-slackbuilds
 colord-gtk 0.3.0 - - 0.2.0                          # Done - SBo
 clutter-gtk 1.8.4 - - 1.8.4                         # Done - SBo
-clutter-gst 3.0.27 - - -                            # Done - SBo
+clutter-gst 3.0.27 - - -                            # Done - gnome-42-slackbuilds
 cheese 41.1 - - -                                   # Done - gnome-42-slackbuilds
 gnome-control-center 42.0 - - -
 libxcvt 0.1.1 - - -
