@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Slackware build script for gnome-calendar-42.0.tar.xz
+# Slackware build script for gnome-calendar
 
 # Copyright 2021 Rafael Tavares (mdrafaeltavares@gmail.com) Bahia, Brazil.
 # Modified by Ioannis Anagnostakis <rizitis@gmail.com> GR (2022)
