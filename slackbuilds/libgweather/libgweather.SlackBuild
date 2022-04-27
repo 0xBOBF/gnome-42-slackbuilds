@@ -1,11 +1,10 @@
-#!/bin/sh
+#!/bin/bash
 
-# Slackware build script for gnome-video-effects
+# Slackware build script for libgweather
 
-# Copyright 2021 Rafael Tavares (mdrafaeltavares@gmail.com) Bahia, Brazil.
+# Copyright 2022 Ozan Türkyılmaz
 # All rights reserved.
 #
-# Modified 2022 Bob Funk (bobfunk11@gmail.com), Winnipeg, Canada
 # Redistribution and use of this script, with or without modification, is
 # permitted provided that the following conditions are met:
 #
@@ -23,36 +22,46 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-PRGNAM=gnome-video-effects
-VERSION=${VERSION:-0.5.0}
-BUILD=${BUILD:-1}
+cd $(dirname $0) ; CWD=$(pwd)
+
+PRGNAM=libgweather
+VERSION=${VERSION:-4.0.0}
+BUILD=${BUILD:-2}
 TAG=${TAG:-_SBo}
-PKGTYPE=${PKGTYPE:-txz}
+PKGTYPE=${PKGTYPE:-tgz}
+
+OWPAPI=${OWPAPI:-false}
+VALA=${VALA:-false}
+GTKDOC=${GTKDOC:-false}
+INTROSPECTION=${INTROSPECTION:-false}
+TESTS=${TESTS:-false}
+GLADE_CATALOG=${GLADE_CATALOG:-false}
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
-    i?86) ARCH=i486 ;;
+    i?86) ARCH=i586 ;;
     arm*) ARCH=arm ;;
        *) ARCH=$( uname -m ) ;;
   esac
 fi
 
-# If the variable PRINT_PACKAGE_NAME is set, then this script will report what
-# the name of the created package would be, and then exit. This information
-# could be useful to other scripts.
 if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
   echo "$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE"
   exit 0
 fi
 
-CWD=$(pwd)
-TMP=${TMP:-/tmp/gfs}
-PKG=$TMP/pkg-$PRGNAM
-OUTPUT=${OUTPUT:-/tmp}
-JOBS=${JOBS:-" -j$(expr $(getconf _NPROCESSORS_ONLN) \* 2 ) "}
+if [ "$OWPAPI" = "false" ]; then
+	OWNAPILINE="-Dstrip=true"
+else
+	OWPAPILINE="-Dowm_apikey=$OWPAPI"
+fi
 
-if [ "$ARCH" = "i486" ]; then
-  SLKCFLAGS="-O2 -march=i486 -mtune=i686"
+TMP=${TMP:-/tmp/SBo}
+PKG=$TMP/package-$PRGNAM
+OUTPUT=${OUTPUT:-/tmp}
+
+if [ "$ARCH" = "i586" ]; then
+  SLKCFLAGS="-O2 -march=i586 -mtune=i686"
   LIBDIRSUFFIX=""
 elif [ "$ARCH" = "i686" ]; then
   SLKCFLAGS="-O2 -march=i686 -mtune=i686"
@@ -71,9 +80,8 @@ rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
-tar xfv $CWD/$PRGNAM-$VERSION.tar.xz
+tar xvf $CWD/$PRGNAM-$VERSION.tar.xz
 cd $PRGNAM-$VERSION
-
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
@@ -83,30 +91,39 @@ find -L . \
 
 mkdir build
 cd build
+  CFLAGS="$SLKCFLAGS" \
+  CXXFLAGS="$SLKCFLAGS" \
+  meson .. \
+    --buildtype=release \
+    --infodir=/usr/info \
+    --libdir=/usr/lib${LIBDIRSUFFIX} \
+    --localstatedir=/var \
+    --mandir=/usr/man \
+    --prefix=/usr \
+    --sysconfdir=/etc \
+    -Dstrip=true \
+    $OWPAPILINE \
+    -Denable_vala="$VALA" \
+    -Dgtk_doc="$GTKDOC"
+    
+  "${NINJA:=ninja}"
+  DESTDIR=$PKG $NINJA install
+cd ..
 
-CFLAGS="$SLKCFLAGS" \
-CXXFLAGS="$SLKCFLAGS" \
-meson .. \
- --prefix=/usr \
- --libdir=/usr/lib${LIBDIRSUFFIX} \
- --sysconfdir=/etc \
- --localstatedir=/var
-
-ninja $JOBS || ninja
-DESTDIR=$PKG ninja install
+rm -f $PKG/{,usr/}lib${LIBDIRSUFFIX}/*.la
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
-cd ..
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a AUTHORS COPYING ChangeLog NEWS README \
+cp -a \
+  *.md COPYING NEWS \
   $PKG/usr/doc/$PRGNAM-$VERSION
-cat $CWD/$(basename $0) > $PKG/usr/doc/$PRGNAM-$VERSION/$(basename $0)
+cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install
-cp $CWD/slack-desc $PKG/install
-cp $CWD/doinst.sh $PKG/install
+cat $CWD/slack-desc > $PKG/install/slack-desc
+cat $CWD/doinst.sh > $PKG/install/doinst.sh
 
 cd $PKG
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE

@@ -1,11 +1,13 @@
 #!/bin/sh
-
-# Slackware build script for gnome-video-effects
+# Slackware build script for tracker-miners3
 
 # Copyright 2021 Rafael Tavares (mdrafaeltavares@gmail.com) Bahia, Brazil.
+# Based on Gentoo ebuild script (Thank you much!!):
+# https://gitweb.gentoo.org/repo/gentoo.git/tree/app-misc/tracker-miners/tracker-miners-3.1.1.ebuild
 # All rights reserved.
 #
-# Modified 2022 Bob Funk (bobfunk11@gmail.com), Winnipeg, Canada
+# Modified 2022 by Bob Funk (bobfunk11@gmail.com) Winnipeg, Canada
+#
 # Redistribution and use of this script, with or without modification, is
 # permitted provided that the following conditions are met:
 #
@@ -23,8 +25,9 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-PRGNAM=gnome-video-effects
-VERSION=${VERSION:-0.5.0}
+PRGNAM=tracker-miners
+PKGNAM=${PRGNAM}
+VERSION=${VERSION:-3.3.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-txz}
@@ -46,8 +49,8 @@ if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
 fi
 
 CWD=$(pwd)
-TMP=${TMP:-/tmp/gfs}
-PKG=$TMP/pkg-$PRGNAM
+TMP=${TMP:-/tmp/SBo}
+PKG=$TMP/package-$PKGNAM
 OUTPUT=${OUTPUT:-/tmp}
 JOBS=${JOBS:-" -j$(expr $(getconf _NPROCESSORS_ONLN) \* 2 ) "}
 
@@ -71,9 +74,8 @@ rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
-tar xfv $CWD/$PRGNAM-$VERSION.tar.xz
+tar xvf $CWD/$PRGNAM-$VERSION.tar.xz
 cd $PRGNAM-$VERSION
-
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
@@ -81,7 +83,7 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-mkdir build
+mkdir -p build
 cd build
 
 CFLAGS="$SLKCFLAGS" \
@@ -90,7 +92,12 @@ meson .. \
  --prefix=/usr \
  --libdir=/usr/lib${LIBDIRSUFFIX} \
  --sysconfdir=/etc \
- --localstatedir=/var
+ --localstatedir=/var \
+ --mandir=/usr/man \
+ --buildtype=release \
+ -Dman=true \
+ -Dminer_rss=false \
+ -Dsystemd_user_services=false 
 
 ninja $JOBS || ninja
 DESTDIR=$PKG ninja install
@@ -98,15 +105,18 @@ DESTDIR=$PKG ninja install
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
+find $PKG/usr/man -type f -exec gzip -9 {} \;
+for i in $( find $PKG/usr/man -type l ) ; do ln -s $( readlink $i ).gz $i.gz ; rm $i ; done
+
 cd ..
-mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a AUTHORS COPYING ChangeLog NEWS README \
-  $PKG/usr/doc/$PRGNAM-$VERSION
-cat $CWD/$(basename $0) > $PKG/usr/doc/$PRGNAM-$VERSION/$(basename $0)
+mkdir -p $PKG/usr/doc/$PKGNAM-$VERSION
+cp -a AUTHORS COPYING* ChangeLog* MAINTAINERS NEWS *.md \
+  $PKG/usr/doc/$PKGNAM-$VERSION
+cat $CWD/$(basename $0) > $PKG/usr/doc/$PKGNAM-$VERSION/$(basename $0)
 
 mkdir -p $PKG/install
-cp $CWD/slack-desc $PKG/install
-cp $CWD/doinst.sh $PKG/install
+cat $CWD/slack-desc > $PKG/install/slack-desc
 
 cd $PKG
-/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE
+/sbin/makepkg -l y -c n $OUTPUT/$PKGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE
+

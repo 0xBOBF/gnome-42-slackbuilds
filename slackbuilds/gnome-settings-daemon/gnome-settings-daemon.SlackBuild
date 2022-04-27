@@ -1,11 +1,16 @@
 #!/bin/sh
 
-# Slackware build script for gnome-video-effects
+# Slackware build script for gnome-settings-daemon
 
-# Copyright 2021 Rafael Tavares (mdrafaeltavares@gmail.com) Bahia, Brazil.
+# Copyright 2016 Rafael Tavares (mdrafaeltavares@gmail.com) Bahia, Brazil.
+# Based on Gentoo ebuild script (Thanks a lot!)
+# https://gitweb.gentoo.org/repo/gentoo.git/tree/gnome-base/gnome-settings-daemon/gnome-settings-daemon-40.0.1.ebuild
+# Based on Linux From Scratch online book (Thanks so much!)
+# https://www.linuxfromscratch.org/blfs/view/svn/gnome/gnome-settings-daemon.html
 # All rights reserved.
 #
-# Modified 2022 Bob Funk (bobfunk11@gmail.com), Winnipeg, Canada
+# Modified 2022 by Bob Funk (bobfunk11@gmail.com), Winnipeg Canada
+#
 # Redistribution and use of this script, with or without modification, is
 # permitted provided that the following conditions are met:
 #
@@ -23,8 +28,8 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-PRGNAM=gnome-video-effects
-VERSION=${VERSION:-0.5.0}
+PRGNAM=gnome-settings-daemon
+VERSION=${VERSION:-42.1}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-txz}
@@ -46,7 +51,7 @@ if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
 fi
 
 CWD=$(pwd)
-TMP=${TMP:-/tmp/gfs}
+TMP=${TMP:-/tmp/SBo}
 PKG=$TMP/pkg-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 JOBS=${JOBS:-" -j$(expr $(getconf _NPROCESSORS_ONLN) \* 2 ) "}
@@ -71,26 +76,60 @@ rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
-tar xfv $CWD/$PRGNAM-$VERSION.tar.xz
+tar xfv $CWD/$PRGNAM-$VERSION.tar.?z*
 cd $PRGNAM-$VERSION
 
 chown -R root:root .
-find -L . \
+
+find -L . -prune -name 'subprojects/gvc/.gitlab-ci' \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
   -o -perm 511 \) -exec chmod 755 {} \; -o \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-mkdir build
+# LFS Patches:
+sed "/  policy,/d" -i plugins/{power,wacom}/meson.build
+
+# Need it if want to run tests
+sed -e 's/libsystemd/libelogind/' \
+    -i plugins/power/test.py
+
+# Fixing backlight functionality in gnome-control-center:
+sed -e 's/(backlight->logind_proxy)/(0)/' \
+    -i plugins/power/gsd-backlight.c
+
+mkdir -p build
 cd build
+
+# -Dnssdb_dir=/usr/include/nss \
+# -Dudev_dir=/etc/udev \
 
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
 meson .. \
  --prefix=/usr \
- --libdir=/usr/lib${LIBDIRSUFFIX} \
+ --buildtype=release \
+ --libdir=lib${LIBDIRSUFFIX} \
+ --libexecdir=/usr/libexec \
  --sysconfdir=/etc \
- --localstatedir=/var
+ --infodir=/usr/info \
+ --mandir=/usr/man \
+ --localstatedir=/var \
+ -Ddefault_library=shared \
+ -Dsystemd=false
+
+# -Dalsa=true \
+# -Dgudev=true \
+# -Dcolord=true \
+# -Dcups=true \
+# -Dnetwork_manager=true \
+# -Drfkill=true \
+# -Dsmartcard=true \
+# -Dusb-protection=true \
+# -Dwacom=true \
+# -Dwayland=true \
+# -Dwwan=true \
+# -Dcolord=true
 
 ninja $JOBS || ninja
 DESTDIR=$PKG ninja install
@@ -98,15 +137,17 @@ DESTDIR=$PKG ninja install
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
+# Don't auto-suspend by default on AC power (Gentoo)
+cp $CWD/org.gnome.settings-daemon.plugins.power.gschema.override $PKG/usr/share/glib-2.0/schemas
+
 cd ..
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a AUTHORS COPYING ChangeLog NEWS README \
+cp -a AUTHORS COPYING* ChangeLog MAINTAINERS NEWS README \
   $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$(basename $0) > $PKG/usr/doc/$PRGNAM-$VERSION/$(basename $0)
 
 mkdir -p $PKG/install
-cp $CWD/slack-desc $PKG/install
-cp $CWD/doinst.sh $PKG/install
 
 cd $PKG
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE
+

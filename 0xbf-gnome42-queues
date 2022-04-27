@@ -1,20 +1,21 @@
 # This file is a work in progress. Please do not touch it.
 
+# DONT BOTHER WITH THIS, Sqg misses many of the deps and you'll have to sbopkg -i them in by hand anyway. I will make a proper queue to feed sbopkg in the future.
 # The following *should* build all the initial packages needed for gnome, from slackbuilds.org:
-sqg -p "totem-pl-parser gnome-autoar avahi libchamplain libpeas evolution-data-server telepathy-glib tracker exempi libgxps gsound libportal zenity libgusb colord-gtk yelp brasero gspell gtksourceview4 appstream-glib gtk-vnc jq p7zip telepathy-glib gnome-menus"
+#sqg -p "totem-pl-parser gnome-autoar avahi libchamplain libpeas evolution-data-server telepathy-glib tracker exempi libgxps gsound libportal zenity libgusb colord-gtk yelp brasero gspell gtksourceview4 appstream-glib gtk-vnc jq p7zip telepathy-glib gnome-menus"
 
 # NOTE: Some deps get listed twice in the sqg queue file with the above command. Therefore it would be best
 # to edit the queue file in /var/lib/sbopkg/queues/ to remove duplicates before running sbopkg on it (we def
 # dont want to build webkit2gtk twice ;-) )
 # Some of these also were missed by sqg and had to be done manually with sbopkg -i after. Not sure why that
-# happened yet, but a custom queue file will fix that too
+# happened yet, but a custom queue file will fix that too. 
 
 # The remaining packages will need to be installed in roughly this order:
 amtk
-gnome-desktop 42.0 - - 41.1 # Done
-gnome-video-effects 0.5.0 - - - # Done
-grilo 0.3.14 - - -  # Done
-folks 0.15.5 - - - ### UP TO HERE. FOLKS F.T.B. Going to leave for now and try later in the build, like gnome 41 did.
+gnome-desktop 42.0 - - 41.1
+gnome-video-effects 0.5.0 - - -
+grilo 0.3.14 - - - 
+folks 0.15.5 - - - # FOLKS F.T.B. Going to leave for now and try later in the build, like gnome 41 did.
 gfbgraph 0.2.5 - - -
 libgrss 0.7.0 - - -
 tracker-miners 3.3.0 - - -
