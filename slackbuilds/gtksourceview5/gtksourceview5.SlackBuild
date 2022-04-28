@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Slackware build script for gtksourceview4
+# Slackware build script for gtksourceview5
 
 # Copyright 2012-2021  Willy Sudiarto Raharjo <willysr@slackbuilds.org>
 # All rights reserved.
