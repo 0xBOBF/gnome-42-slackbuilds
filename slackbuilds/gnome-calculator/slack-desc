@@ -12,8 +12,8 @@ gnome-calculator: GNOME Calculator is a powerful graphical calculator with finan
 gnome-calculator: logical and scientific modes. It uses a multiple precision package to
 gnome-calculator: do its arithmetic to give a high degree of accuracy.
 gnome-calculator:
+gnome-calculator: 
+gnome-calculator:
+gnome-calculator:
 gnome-calculator: https://gitlab.gnome.org/GNOME/gnome-calculator
-gnome-calculator:
-gnome-calculator:
-gnome-calculator:
 gnome-calculator:

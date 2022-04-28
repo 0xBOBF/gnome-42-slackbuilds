@@ -1,3 +1,11 @@
-Folks
-libfolks is a library that aggregates people from multiple sources (eg,
-Telepathy connection managers) to create metacontacts
+Folks is a library that aggregates people from multiple sources (e.g, Telepathy connection managers and Evolution Data Server, Facebook, etc.) to create metacontacts.
+
+Required Dependencies:
+- evolution-data-server
+- libgee
+- dbusmock
+- telepathy-glib
+
+Optional Dependencies:
+- libsocialweb
+- Zeitgeist

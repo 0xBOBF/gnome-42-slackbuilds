@@ -1,1 +1,11 @@
 GNOME Disk Utility
+
+This gnome-disk-utility repository provides libraries and applications for
+dealing with storage devices.
+
+Required Dependencies:
+- gnome-settings-daemon
+- libhandy
+
+Optional Dependencies:
+- appstream-glib

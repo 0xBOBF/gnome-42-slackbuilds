@@ -14,3 +14,4 @@ folks: Server for local contacts, libsocialweb for web service contacts,
 folks: etc.) to create metacontacts. It's written in Vala, which generates C
 folks: code when compiled.
 folks:
+folks: https://gitlab.gnome.org/GNOME/folks

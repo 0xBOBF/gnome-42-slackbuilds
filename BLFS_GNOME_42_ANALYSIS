@@ -35,9 +35,9 @@ libgdata 0.18.1 - - 0.18.1                          # Done - SBo (emailed mainta
 libgweather 4.0.0 - - 40.0                          # Done - SBo (Manually upgraded to 4.0.0 and will add to gnome-42-slackbuilds for now)
 libpeas 1.32.0 - - 1.30.0                           # Done - SBo
 evolution-data-server 3.44.1 - - 3.44.0             # Done - SBo
-# dbusmock 0.27.5 - - -                             # Skipped - This is only needed if building tests for 'folks', so we wont
+fi
+# dbusmock 0.27.5 - - -                             # Skipped - This is only needed if building tests for 'folks' and a few others, so we wont do that.
 telepathy-glib 0.24.2 - - 0.24.1                    # Done - SBo
-folks 0.15.5 - - -                                  # Fails to Build. Going to try later in the build, since thats where it was in gnome 41.
 gfbgraph 0.2.5 - - -                                # Done - gnome-42-slackbuilds
 tracker 3.3.0 - - 3.2.1                             # Done - SBo
 exempi 2.6.1 - - 2.5.2                              # Done - SBo
@@ -62,7 +62,7 @@ clutter-gst 3.0.27 - - -                            # Done - gnome-42-slackbuild
 cheese 41.1 - - -                                   # Done - gnome-42-slackbuilds
 gnome-control-center 42.0 - - -                     # Done - gnome-42-slackbuilds (note: requires a newer gtk4 in slackware, and a rebuild of libnma to support gtk4).
    
-#libxcvt 0.1.1 - - -                                # Skipped - Was supposed to beused by mutter, but mutter built fine without it.
+#libxcvt 0.1.1 - - -                                # Skipped - Was supposed to be used by mutter, but mutter built fine without it.
 mutter 42.0 - - -                                   # Done - gnome-42-slackbuilds
 gnome-shell 42.0 - - -                              # Done - gnome-42-slackbuilds (note: Needs upgraded gjs in slackware-current, and gjs needs mozjs91... thanks snuk!)
 gnome-shell-extensions 42.0 - - -                   # Done - gnome-42-slackbuilds
@@ -76,24 +76,25 @@ baobab 42.0 - - -                                   # Done - gnome-42-slackbuild
 brasero 3.12.3 - - 3.12.3                           # Done - SBo
 eog 42.0 - - -                                      # Done - gnome-42-slackbuilds
 gspell 1.10.0 - - 1.9.1                             # Done - SBo
-evince 42.2 - - 41.3                                # Skipped - SBo build fails
+evince 42.2 - - 41.3                                # Skipped - Needs an updated poppler to version >= 22.02.0
 seahorse 41.0 - - 3.18.0                            # Done - SBo (Using older version for now)
-evolution 3.44.1 - - -
-file-roller 3.42 - - 3.36.2
-gtksourceview5 5.4.1 - - - # Has gtksourceview4 4.8.1
-gnome-calculator 42.0 - - -
-gnome-color-manager 3.36.0 - - -
-gnome-disk-utility 42.0 - - 3.38.2
-appstream-glib - - - 0.7.18                         # Done - SBo
-gnome-maps 42.1 - - -
-gnome-nettool 42.0 - - -
-gnome-power-manager 3.32.0 - - -
-gnome-system-monitor 42.0 - - -
-gnome-tweaks 40.0 - - -
-gnome-weather 42.0 - - -
-gtk-vnc 1.3.0 - - 1.3.0
-vinagre 3.22.0 - - -
+evolution 3.44.1 - - -                              # Done - gnome-42-slackbuilds
+file-roller 3.42 - - 3.36.2                         # Done - SBo (Using older version for now) 
+gtksourceview5 5.4.1                                # Done - SBo (Upgraded the SBo version from gtksourceview4 to gtksourceview5)
+gnome-calculator 42.0 - - -                         # Done - gnome-42-slackbuilds
+gnome-color-manager 3.36.0 - - -                    # Done - gnome-42-slackbuilds
+gnome-disk-utility 42.0 - - 3.38.2                  # Done - gnome-42-slackbuilds
+appstream-glib - - 0.7.18                           # Done - SBo
+folks 0.15.5 - - -                                  # Done - gnome-42-slackbuilds  (This needed enabling introspection in libgdata and evolution-data-server to build, so those SBo builds will need variables passed...)
+gnome-maps 42.1 - - -                               # Done - gnome-42-slackbuilds (Needed to enable introspection on geocode-glib, libgweather, libchamplain, gnome-online-accounts so more variables to pass...)
+gnome-nettool 42.0 - - -                            # Done - gnome-42-slackbuilds
+gnome-power-manager 3.32.0 - - -                    # Done - gnome-42-slackbuilds
+gnome-system-monitor 42.0 - - -                     # Done - gnome-42-slackbuilds
+gnome-tweaks 42.beta - - -                          # Done - gnome-42-slackbuilds
+gnome-weather 42.0 - - -                            # Done - gnome-42-slackbuilds
+gtk-vnc 1.3.0 - - 1.3.0                             # Done - SBo
+vinagre 3.22.0 - - -                                # Done - gnome-42-slackbuilds
 
-jq - - - 1.6
-p7zip - - - 17.04 # Is this needed for chrome-gnome-shell?
-chrome-gnome-shell - - -
+jq - - - 1.6                                        # Done - SBo
+p7zip - - - 17.04                                   # Done - SBo
+chrome-gnome-shell 10.1 - - -                       # Done - gnome-42-slackbuilds 

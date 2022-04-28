@@ -1,0 +1,18 @@
+Evolution is the integrated mail, calendar and address book suite from
+the Evolution Team.
+
+Required Dependencies:
+- evolution-data-server
+- gnome-autoar
+- libgdata
+- webkit2gtk
+- gnome-desktop
+- gspell
+- libgweather
+- seahorse
+
+Optional Dependencies:
+- clutter-gtk
+- geoclue2
+- geocode-glib
+- libchamplain

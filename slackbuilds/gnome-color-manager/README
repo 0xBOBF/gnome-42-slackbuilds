@@ -1,2 +1,9 @@
 GNOME Color Manager
-	       Color profile manager for the GNOME desktop
+
+Color profile manager for the GNOME desktop.
+
+Required Dependencies:
+- colord
+
+Optional Dependencies:
+- appstream-glib

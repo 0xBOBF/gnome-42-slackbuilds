@@ -12,3 +12,8 @@ gnome-nettool: GNOME Nettool is a set of front-ends to various networking
 gnome-nettool: command-line tools, like ping, netstat, ifconfig, whois,
 gnome-nettool: traceroute, finger.
 gnome-nettool:
+gnome-nettool:
+gnome-nettool:
+gnome-nettool:
+gnome-nettool: https://gitlab.gnome.org/GNOME/gnome-nettool
+gnome-nettool:

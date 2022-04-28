@@ -1,0 +1,8 @@
+This is Vinagre, a remote desktop viewer for the GNOME Desktop.
+
+You can download or see more information about it on:
+   https://wiki.gnome.org/Apps/Vinagre
+
+Required Dependencies:
+- gtk-vnc
+- telepathy-glib

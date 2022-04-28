@@ -1,3 +1,14 @@
 Maps is a map application for GNOME.
 More information on https://wiki.gnome.org/Apps/Maps
 
+Required Dependencies:
+- clutter-gtk
+- folks
+- geoclue2
+- geocode-glib
+- gfbgraph
+- gjs
+- libchamplain
+- libgweather
+- libhandy
+- rest

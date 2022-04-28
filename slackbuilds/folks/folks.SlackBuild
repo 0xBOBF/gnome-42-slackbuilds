@@ -1,10 +1,11 @@
-#!/bin/bash
+#!/bin/sh
 
 # Slackware build script for folks
 
 # Copyright 2021 Rafael Tavares (mdrafaeltavares@gmail.com) Bahia, Brazil.
-# Modified by Ioannis Anagnostakis <rizitis@gmail.com> GR (2022)
 # All rights reserved.
+#
+# Modified 2022 Bob Funk (bobfunk11@gmail.com) Winnipeg, Canada
 #
 # Redistribution and use of this script, with or without modification, is
 # permitted provided that the following conditions are met:
@@ -23,21 +24,16 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-
-cd $(dirname $0) ; CWD=$(pwd)
-
-PRGNAM=folks		# replace with name of program
-VERSION=${VERSION:-0.15.5}	# replace with version of program
+PRGNAM=folks
+VERSION=${VERSION:-0.15.5}
 BUILD=${BUILD:-1}
-TAG=${TAG:-_SBo}		# the "_SBo" is required
-PKGTYPE=${PKGTYPE:-tgz}
+TAG=${TAG:-_SBo}
+PKGTYPE=${PKGTYPE:-txz}
 
-# Automatically determine the architecture we're building on:
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
-    i?86) ARCH=i586 ;;
+    i?86) ARCH=i486 ;;
     arm*) ARCH=arm ;;
-    # Unless $ARCH is already set, use uname -m for all other archs:
        *) ARCH=$( uname -m ) ;;
   esac
 fi
@@ -50,12 +46,14 @@ if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
   exit 0
 fi
 
-TMP=${TMP:-/tmp/SBo}	# For consistency's sake, use this
-PKG=$TMP/package-$PRGNAM
-OUTPUT=${OUTPUT:-/tmp}	# Drop the package in /tmp
+CWD=$(pwd)
+TMP=${TMP:-/tmp/SBo}
+PKG=$TMP/pkg-$PRGNAM
+OUTPUT=${OUTPUT:-/tmp}
+JOBS=${JOBS:-" -j$(expr $(getconf _NPROCESSORS_ONLN) \* 2 ) "}
 
-if [ "$ARCH" = "i586" ]; then
-  SLKCFLAGS="-O2 -march=i586 -mtune=i686"
+if [ "$ARCH" = "i486" ]; then
+  SLKCFLAGS="-O2 -march=i486 -mtune=i686"
   LIBDIRSUFFIX=""
 elif [ "$ARCH" = "i686" ]; then
   SLKCFLAGS="-O2 -march=i686 -mtune=i686"
@@ -68,17 +66,15 @@ else
   LIBDIRSUFFIX=""
 fi
 
-set -e # Exit on most errors
-# If you prefer to do selective error checking with
-#   command || exit 1
-# then that's also acceptable.
+set -e
 
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
-tar xvf $CWD/$PRGNAM-$VERSION.tar.xz
+tar xfv $CWD/$PRGNAM-$VERSION.tar.?z*
 cd $PRGNAM-$VERSION
+
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
@@ -86,13 +82,10 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-# Your application will probably need different configure flags;
-# these are provided as an example only.
-# Be sure to build only shared libraries unless there's some need for
-# static.
-mkdir build
+mkdir -p build
 cd build
-  CFLAGS="$SLKCFLAGS" \
+
+CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
 meson .. \
  --prefix=/usr \
@@ -100,45 +93,22 @@ meson .. \
  --libdir=/usr/lib${LIBDIRSUFFIX} \
  --mandir=/usr/man \
  -Ddefault_library=shared \
- -Dbluez_backend=true \
- -Deds_backend=true \
- -Dofono_backend=true \
- -Dtelepathy_backend=true \
- -Dzeitgeist=false \
- -Dimport_tool=true \
- -Dinspect_tool=true \
- -Dprofiling=false \
- -Dtests=false \
- -Dinstalled_tests=false \
- -Ddocs=false 
-cd ..
+ -Dtests=false 
 
+ninja $JOBS || ninja
+DESTDIR=$PKG ninja install
 
-# Strip binaries and libraries - this can be done with 'make install-strip'
-# in many source trees, and that's usually acceptable if so, but if not,
-# use this:
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
-
-
-# Copy program documentation into the package
-# The included documentation varies from one application to another, so be sure
-# to adjust your script as needed
-# Also, include the SlackBuild script in the documentation directory
+cd ..
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a AUTHORS *.md COPYING NEWS \
   $PKG/usr/doc/$PRGNAM-$VERSION
-cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
+cat $CWD/$(basename $0) > $PKG/usr/doc/$PRGNAM-$VERSION/$(basename $0)
 
-# Copy the slack-desc (and a custom doinst.sh if necessary) into ./install
 mkdir -p $PKG/install
-cat $CWD/slack-desc > $PKG/install/slack-desc
+cp $CWD/slack-desc $PKG/install
 
-
-# Make the package; be sure to leave it in $OUTPUT
-# If package symlinks need to be created during install *before*
-# your custom contents of doinst.sh runs, then add the -p switch to
-# the makepkg command below -- see makepkg(8) for details
 cd $PKG
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE

@@ -14,6 +14,6 @@ gnome-system-monitor: such as a tree view for process dependencies,icons for pro
 gnome-system-monitor: the ability to hide processes that you don't want to see,graphical 
 gnome-system-monitor: time histories of CPU/memory/swap usage,the ability to kill/renice.
 gnome-system-monitor:
-gnome-system-monitor: gnome-system-monitor
+gnome-system-monitor: 
 gnome-system-monitor: https://gitlab.gnome.org/GNOME/gnome-system-monitor
 gnome-system-monitor:
