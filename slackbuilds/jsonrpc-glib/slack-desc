@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+       |-----handy-ruler------------------------------------------------------|
+jsonrpc-glib: jsonrpc-glib (JSON-RPC 2.0 Library)
+jsonrpc-glib:
+jsonrpc-glib: Jsonrpc-GLib is a library to communicate with JSON-RPC based 
+jsonrpc-glib: peers in either a synchronous or asynchronous fashion. It also 
+jsonrpc-glib: allows communicating using the GVariant serialization format 
+jsonrpc-glib: instead of JSON when both peers support it. You might want that 
+jsonrpc-glib: when communicating on a single host to avoid parser overhead and 
+jsonrpc-glib: memory-allocator fragmentation.
+jsonrpc-glib:
+jsonrpc-glib: https://gitlab.gnome.org/GNOME/jsonrpc-glib
+jsonrpc-glib:

@@ -8,12 +8,12 @@
                 |-----handy-ruler------------------------------------------------------|
 gnome-characters: gnome-characters
 gnome-characters:
-gnome-characters:Characters is a simple utility application to find and insert unusual
-gnome-characters:characters.  It allows you to quickly find the character you are
-gnome-characters:looking for by searching for keywords.
+gnome-characters: Characters is a simple utility application to find and insert unusual
+gnome-characters: characters.  It allows you to quickly find the character you are
+gnome-characters: looking for by searching for keywords.
 gnome-characters:
 gnome-characters:
 gnome-characters:
 gnome-characters:
-gnome-characters:https://gitlab.gnome.org/GNOME/gnome-characters
+gnome-characters: https://gitlab.gnome.org/GNOME/gnome-characters
 gnome-characters:

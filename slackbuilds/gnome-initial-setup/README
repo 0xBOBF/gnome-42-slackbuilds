@@ -1,3 +1,16 @@
 GNOME Initial Setup
 
+After acquiring or installing a new system there are a few essential things
+to set up before use. gnome-initial-setup aims to provide a simple, easy,
+and safe way to prepare a new system.
+This should only include a few essential steps for which we can't provide
+good defaults:
+
+- Select your language
+- Get onto the network
+- Create a user account
+- Set the correct timezone / location
+- Set up online accounts
+- Learn some basics about GNOME 3
+
 https://gitlab.gnome.org/GNOME/gnome-initial-setup
