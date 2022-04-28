@@ -45,7 +45,6 @@ if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
   exit 0
 fi
 
-<<<<<<< HEAD
 CWD=$(pwd)
 TMP=${TMP:-/tmp/SBo}
 PKG=$TMP/pkg-$PRGNAM
