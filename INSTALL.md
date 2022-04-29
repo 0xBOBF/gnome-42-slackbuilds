@@ -6,13 +6,13 @@ THIS IS A WORK IN PROGRESS AND HASNT BEEN TESTED YET. USE AT YOUR OWN RISK
 There are a couple of users and groups that need to be created before starting
 the build, else the relevant builds will fail. This is the avahi and colord 
 users and groups:
-
+```bash
  groupadd -g 214 avahi
  useradd -u 214 -g 214 -c "Avahi User" -d /dev/null -s /bin/false avahi
 
  groupadd -g 303 colord
  useradd -d /var/lib/colord -u 303 -g colord -s /bin/false colord
-
+```
 Note that the 'gdm' user and group is already present on stock slackware.
 
 ## Prepare sbopkg
@@ -25,7 +25,7 @@ Once sbopkg is configured, you can install the full set using the queue files
 provided in this repo.
 
 For example:
-
-# sbopkg -i gnome-42-full.sqf
-
+```bash
+sbopkg -i gnome-42-full.sqf
+```
 
