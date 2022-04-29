@@ -99,7 +99,6 @@ jsonrpc-glib
 template-glib
 gnome-panel
 gnome-applets
-gnome-builder
 gnome-calendar
 gnome-characters
 gnome-flashback
@@ -108,6 +107,7 @@ xdg-desktop-portal-gnome
 ostree
 flatpak
 malcontent
+#gnome-builder
 gnome-initial-setup
 liblouis
 orca
