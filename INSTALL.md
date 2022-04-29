@@ -137,7 +137,7 @@ REPO_NAME=${REPO_NAME:-testing}
 At this point sbopkg is ready to be used for installing gnome-packages. For example,
 you could issue:
 ``` bash
-sbopkg -i gnome-shell
+sbopkg -f /root/sbopkg.conf -i gnome-shell
 ```
 And the gnome-shell package should be found and queued for building.
 
@@ -154,6 +154,6 @@ provided in this repo.
 
 For example:
 ```bash
-sbopkg -i gnome-42-full.sqf
+sbopkg -f /root/.sbopkg.conf -i gnome-42-full.sqf
 ```
 
