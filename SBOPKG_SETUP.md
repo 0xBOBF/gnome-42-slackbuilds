@@ -41,7 +41,7 @@ Now enter the repo and add the new gnome repo to git so sbopkg will find it.
  git commit -m "Add GNOME Builds"
 ```
 The next step is to define the new repo for sbopkg. To do this we make a copy of the
-local repo and set it up our for our repo.
+example local repo definition and set it up for ourselves:
 ``` bash
  cd /etc/sbopkg/repos.d
  cp 50-local.repo 51-local.repo
