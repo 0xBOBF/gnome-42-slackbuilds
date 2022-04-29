@@ -10,6 +10,7 @@ geocode-glib
 gnome-autoar
 bubblewrap
 gnome-desktop
+gnome-menus
 gnome-video-effects
 libwpe
 wpebackend-fdo
