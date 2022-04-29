@@ -27,7 +27,7 @@ First lets clone SBo's master branch:
 ``` bash
 git clone https://gitlab.com/SlackBuilds.org/slackbuilds.git -b master ./testing
 ```
-Now we want to add our slackbuilds to the repo so we can use both SBo and our
+Now we want to add our slackbuilds to the repo so we can use both SBo and GNOME
 builds. The following commands clone the repo, then copy the slackbuilds to the 
 proper hierarchy, using a 'gnome' sub-directory:
 ``` bash
