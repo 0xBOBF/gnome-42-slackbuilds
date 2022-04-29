@@ -89,7 +89,7 @@ meson .. \
  --localstatedir=/var \
  -Ddefault_library=shared \
  -Dgtk_doc=false \
- -Dman=false \
+ -Dman=true \
  -Dtests=false \
  -Dsystemd=false
 
