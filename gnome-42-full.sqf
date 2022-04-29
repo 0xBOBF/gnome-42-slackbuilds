@@ -55,7 +55,7 @@ mutter
 gnome-shell
 gnome-shell-extensions
 gnome-session
-GDM
+gdm
 gnome-user-docs
 yelp
 baobab
