@@ -122,10 +122,6 @@ cp -a AUTHORS COPYING ChangeLog* HACKING MAINTAINERS NEWS README \
   $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$(basename $0) > $PKG/usr/doc/$PRGNAM-$VERSION/$(basename $0)
 
-mkdir -p $PKG/etc/X11/Sessions
-cat $CWD/files/Gnome > $PKG/etc/X11/Sessions/Gnome
-cat $CWD/files/defaults.list-r5 > $PKG/etc/X11/Sessions/gnome-mimeapps.list
-
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
 cat $CWD/doinst.sh > $PKG/install/slack-desc
