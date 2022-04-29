@@ -96,6 +96,7 @@ libdazzle
 gitg
 libwnck4
 jsonrpc-glib
+template-glib
 gnome-panel
 gnome-applets
 gnome-builder

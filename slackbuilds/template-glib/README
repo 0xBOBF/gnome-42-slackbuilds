@@ -1,0 +1,1 @@
+template-glib is a library for template expansion which supports calling into GObject Introspection from templates.
