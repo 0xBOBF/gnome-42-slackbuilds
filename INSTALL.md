@@ -1,6 +1,14 @@
-THIS IS A WORK IN PROGRESS AND HASNT BEEN TESTED YET. USE AT YOUR OWN RISK 
+# Installing GNOME 42 on Slackware-current
+Note: These instructions assume that you are using a clean and up-to-date slackware-current installation. You will also need to be root for these steps.
 
 # Pre-Build Steps
+
+## Install sbopkg
+We are going to use 'sbokpkg' to install GNOME 42 in the proper order so first we must install sbopkg. We can use the pre-built package for that:
+```bash
+wget https://github.com/sbopkg/sbopkg/releases/download/0.38.2/sbopkg-0.38.2-noarch-1_wsr.tgz
+installpkg sbopkg-0.38.2-noarch-1_wsr.tgz
+```
 
 ## Users and Groups
 There are a couple of users and groups that need to be created before starting
@@ -14,6 +22,29 @@ users and groups:
  useradd -d /var/lib/colord -u 303 -g colord -s /bin/false colord
 ```
 Note that the 'gdm' user and group is already present on stock slackware.
+
+Having the above users and groups is enough to build GNOME 42. You will also need to start/stop avahi on your system by adding the following to `/etc/rc.d/rc.local`:
+```bash
+# Start avahidaemon
+if [ -x /etc/rc.d/rc.avahidaemon ]; then
+ /etc/rc.d/rc.avahidaemon start
+fi
+# Start avahidnsconfd
+if [ -x /etc/rc.d/rc.avahidnsconfd ]; then
+  /etc/rc.d/rc.avahidnsconfd start
+fi
+```
+For shutdown, edit/create `/etc/rc.d/rc.local_shutdown` and include the following lines:
+
+```bash
+# Stop avahidnsconfd
+if [ -x /etc/rc.d/rc.avahidnsconfd ]; then
+  /etc/rc.d/rc.avahidnsconfd stop
+fi
+# Stop avahidaemon
+if [ -x /etc/rc.d/rc.avahidaemon ]; then
+  /etc/rc.d/rc.avahidaemon stop
+fi
 
 ## Prepare sbopkg
 Building GNOME 42 requires following a prescribed order of building and installing

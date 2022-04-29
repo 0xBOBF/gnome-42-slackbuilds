@@ -1,0 +1,13 @@
+gnome-desktop
+gnome-online-accounts
+cogl
+clutter
+clutter-gtk ??
+libchamplain
+libgdata
+libgweather
+evolution-data-server
+libportal
+colord-gtk
+libgit2-glib
+
