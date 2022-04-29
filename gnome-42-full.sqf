@@ -41,6 +41,7 @@ libhandy
 libportal
 nautilus
 zenity
+libadwaita
 gnome-bluetooth
 libgusb
 colord
