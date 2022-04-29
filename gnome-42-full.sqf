@@ -73,6 +73,8 @@ gnome-disk-utility
 appstream-glib
 folks
 gnome-maps
+lxml
+yelp-tools
 gnome-nettool
 gnome-power-manager
 gnome-system-monitor
