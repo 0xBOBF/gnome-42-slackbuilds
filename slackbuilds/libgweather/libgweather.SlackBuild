@@ -103,7 +103,7 @@ cd build
     --sysconfdir=/etc \
     -Dstrip=true \
     $OWPAPILINE \
-    -Denable_vala="$VALA" \
+    -Denable_vala=true \
     -Dgtk_doc="$GTKDOC"
     
   "${NINJA:=ninja}"
