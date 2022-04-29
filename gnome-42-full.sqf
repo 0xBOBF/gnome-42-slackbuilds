@@ -100,6 +100,7 @@ gnome-calendar
 gnome-characters
 gnome-flashback
 xdg-desktop-portal-gtk
+xdg-desktop-portal-gnome
 ostree
 flatpak
 malcontent
