@@ -136,6 +136,11 @@ sbopkg -i gnome-shell
 ```
 And the gnome-shell package should be found and queued for building.
 
+## Set Environment Variables
+Some of the builds in the queue require passing variables to set build options like introspection. Therefore, before you start the build, make sure to set the following variables:
+```bash
+export INTROSPECTION=true
+```
 ## Run sbopkg Using the Queue-file
 Once sbopkg is configured, you can install the full set using the queue files
 provided in this repo.
