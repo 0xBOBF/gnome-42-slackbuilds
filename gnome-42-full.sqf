@@ -1,3 +1,4 @@
+#pango
 #gtk4
 #libnma
 #mozjs91

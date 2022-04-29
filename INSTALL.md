@@ -43,6 +43,7 @@ fi
 ## Core Package Upgrades:
 Several of the core packages of Slackware need to be upgraded for this build to work. The appropriate build scripts are provided in the gnome repo so
 start with copying the repo and upgrading/installing these packages. Note that mozjs91 is included in this list because it needs to come before gjs.
+- pango
 - gtk4
 - libnma
 - mozjs91
@@ -53,16 +54,16 @@ Navigate to roots home directory and get a copy of the repo:
 cd ~
 git clone https://github.com/0xBOBF/gnome-42-slackbuilds.git
 ```
-Then nagivate to the appropriate sub-directories for the listed packages and run the respective builds. The following example shows how to do that for gtk4:
+Then nagivate to the appropriate sub-directories for the listed packages and run the respective builds. The following example shows how to do that for pango:
 ```bash
-cd ./gnome-42-slackbuilds/slackbuilds/gtk4
-source gtk4.info
+cd ./gnome-42-slackbuilds/slackbuilds/pango
+source pango.info
 wget $DOWNLOAD
-sh gtk4.SlackBuild
+sh pango.SlackBuild
 ```
 Then when it is done building, upgrade/install the package before moving on to the next one. E.g.
 ```bash
-upgradepkg --reinstall --install-new /tmp/gtk4-4.6.2-x86_64-1.tgz
+upgradepkg --reinstall --install-new /tmp/pango-1.50.7-x86_64-1.txz
 ```
 Repeat these steps with the remaining packages in the list.
 
@@ -140,6 +141,8 @@ And the gnome-shell package should be found and queued for building.
 Some of the builds in the queue require passing variables to set build options like introspection. Therefore, before you start the build, make sure to set the following variables:
 ```bash
 export INTROSPECTION=true
+export VALA=yes
+export VAPI=yes
 ```
 ## Run sbopkg Using the Queue-file
 Once sbopkg is configured, you can install the full set using the queue files
