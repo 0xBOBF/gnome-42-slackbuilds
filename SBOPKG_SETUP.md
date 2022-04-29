@@ -3,7 +3,7 @@
 ## Introduction:
 
 The 'sbopkg' tool provides a convenient way to process SlackBuild scripts and more
-importantly, process queues of slackbuilds in the correct order.
+importantly, processing queues of slackbuilds in the correct order.
 
 We can take advantage of this to install GNOME 42 in the correct build order. This 
 is possible with setting up a local repository for 'sbopkg' to use instead of the
