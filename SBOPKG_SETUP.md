@@ -34,7 +34,7 @@ proper hierarchy, using a 'gnome' sub-directory:
  git clone https://github.com/0xBOBF/gnome-42-slackbuilds.git
  cp -r ./gnome-42-slackbuilds/slackbuilds ./testing/gnome
 ```
-Now enter the repo and add the new gnome repo to git so sbopkg will find it.
+Now enter the repo and add the new gnome directory to git so sbopkg will find it.
 ``` bash
  cd testing
  git add .
@@ -51,11 +51,7 @@ Then use a text editor to edit `51-local.repo` and point it to the repo. This co
 # Repo Branch Description Tag Tool Link CheckGPG
 testing master "SBo with GNOME Repo" _SBo git "" ""
 ```
-Finally, edit the sbopkg to use this new repo. E.g. using `vim`:
-``` bash
- # vim /etc/sbopkg/sbopkg.conf
-```
-And edit the REPO_BRANCH and REPO_NAME lines to match:
+Finally, edit the `/etc/sbopkg/sbopkg.conf` file to use this new repo so the REPO_BRANCH and REPO_NAME lines match:
 ``` bash
 REPO_BRANCH=${REPO_BRANCH:-master}
 REPO_NAME=${REPO_NAME:-testing}
