@@ -10,7 +10,7 @@ is possible with setting up a local repository for 'sbopkg' to use instead of th
 official branch. 
 
 ## Setting up a Local Repo:
-Setting up a local repo for 'sbopkg' requires two steps:
+Setting up a local repo for 'sbopkg' requires three steps:
 
  1. Set up a repo in the proper format for sbopkg.
  1. Define the repo in `/etc/sbopkg/repos.d/`
