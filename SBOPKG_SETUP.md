@@ -46,7 +46,7 @@ example local repo definition and set it up for ourselves:
  cd /etc/sbopkg/repos.d
  cp 50-local.repo 51-local.repo
 ```
-Then use a text editor to point to the repo. This config works with the steps above:
+Then use a text editor to edit `51-local.repo` and point it to the repo. This config works with the steps above:
 ``` bash
 # Repo Branch Description Tag Tool Link CheckGPG
 testing master "SBo with GNOME Repo" _SBo git "" ""
