@@ -62,7 +62,7 @@ baobab
 brasero
 eog
 gspell
-evince
+#evince
 seahorse
 evolution
 file-roller
