@@ -43,10 +43,9 @@ Now enter the repo and add the new gnome directory to git so sbopkg will find it
 The next step is to define the new repo for sbopkg. To do this we make a copy of the
 example local repo definition and set it up for ourselves:
 ``` bash
- cd /etc/sbopkg/repos.d
- cp 50-local.repo 51-local.repo
+ cp /etc/sbopkg/repos.d/50-local.repo /etc/sbopkg/repos.d/51-local.repo
 ```
-Then use a text editor to edit `51-local.repo` and point it to the repo. This config works with the steps above:
+Then use a text editor to edit `/etc/sbopkg/repos.d/51-local.repo` and point it to the repo. This config works with the steps above:
 ``` bash
 # Repo Branch Description Tag Tool Link CheckGPG
 testing master "SBo with GNOME Repo" _SBo git "" ""
