@@ -124,7 +124,11 @@ Then use a text editor to edit `/etc/sbopkg/repos.d/51-local.repo` and point it 
 testing master "SBo with GNOME Repo" _SBo git "" ""
 ```
 
-Finally, edit the `/etc/sbopkg/sbopkg.conf` file to use this new repo so the REPO_BRANCH and REPO_NAME lines match:
+Finally, make a copy of the `sbopkg.conf` file and edit it so it uses this new repo:
+``` bash
+cp /etc/sbopkg/sbopkg.conf ~/.sbopkg.conf
+```
+Then edit `~/.sbopkg.conf` so that the repo name and branch match:
 ``` bash
 REPO_BRANCH=${REPO_BRANCH:-master}
 REPO_NAME=${REPO_NAME:-testing}

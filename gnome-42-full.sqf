@@ -102,7 +102,7 @@ gnome-panel
 gnome-applets
 gnome-calendar
 gnome-characters
-gnome-flashback
+#gnome-flashback
 xdg-desktop-portal-gtk
 xdg-desktop-portal-gnome
 ostree
