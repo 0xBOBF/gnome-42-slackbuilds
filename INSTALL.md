@@ -99,7 +99,7 @@ builds. If you followed the first steps then you will have a copy of the GNOME r
 ``` bash
  cp -r ~/gnome-42-slackbuilds/slackbuilds ./testing/10-gnome
 ```
-Note: Putting '10' infront of the name will ensure that versions of builds in the gnome repo are prioritized over builds that in the SBo repo in the situation where we use a newer version for gnome.
+Note: Putting '10' infront of the name will ensure that versions of builds in the gnome repo are prioritized over builds that are in the SBo repo, which is used to handle the situation where we use a newer version of a build.
 
 Now enter the repo and add the new gnome directory to git so sbopkg will find it.
 ``` bash
