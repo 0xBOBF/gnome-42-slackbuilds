@@ -1,0 +1,4 @@
+Review the gdm configure options and set pam modules to install
+to /lib64/security/ instead of /usr/lib64/security.
+
+

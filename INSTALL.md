@@ -107,6 +107,29 @@ Now enter the repo and add the new gnome directory to git so sbopkg will find it
  git add .
  git commit -m "Add GNOME Builds"
 ```
+Note: If you get a warning like this, its because you dont have a git profile saved.
+``` bash
+Author identity unknown
+
+*** Please tell me who you are.
+
+Run
+
+  git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"
+
+to set your account's default identity.
+Omit --global to set the identity only in this repository.
+
+fatal: empty ident name (for <root@slackbox.local>) not allowed
+```
+You can just enter in the example commands as written, and redo the commit.
+``` bash
+ git config --global user.email "you@example.com"
+ git config --global user.name "Your Name"
+ git commit -m "Add GNOME Builds"
+
+```
 Now set up the queue file for sbopkg copying the queue file from the gnome repo to `/var/lib/sbopkg/queues` (Create this directory if it doesn't exist yet).
 ```bash
 cp ~/gnome-42-slackbuilds/gnome-42-full.sqf /var/lib/sbopkg/queues/
