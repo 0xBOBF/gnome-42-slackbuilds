@@ -106,9 +106,9 @@ meson .. \
  --localstatedir=/var \
  -Ddbus-sys="/usr/share/dbus-1/system.d" \
  -Ddefault-pam-config=none \
+ -Dpam-mod-dir="/lib${LIBDIRSUFFIX}/security" \
  -Ddefault-path="/usr/local/bin:/usr/bin:/bin" \
  -Dgdm-xsession=true \
- -Dipv6=false \
  -Dplymouth=disabled \
  -Drun-dir=/run/gdm \
  -Dselinux=disabled \
