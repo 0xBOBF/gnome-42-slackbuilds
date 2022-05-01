@@ -6,14 +6,14 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
            |-----handy-ruler------------------------------------------------------|
-gnome-games: gnome-games (document utilities)
-gnome-games:
-gnome-games: Games is a GNOME application to browse your local video games library
-gnome-games: and to easily pick and play a game from it.
-gnome-games:
-gnome-games: Homepage: https://wiki.gnome.org/Apps/Games 
-gnome-games:
-gnome-games:
-gnome-games:
-gnome-games:
-gnome-games:
+gnome-mines: gnome-mines 
+gnome-mines:
+gnome-mines: Mines (previously gnomine) is a puzzle game where you locate mines 
+gnome-mines: floating in an ocean using only your brain and a little bit of luck.
+gnome-mines:
+gnome-mines: Homepage: https://gitlab.gnome.org/GNOME/gnome-mines 
+gnome-mines:
+gnome-mines:
+gnome-mines:
+gnome-mines:
+gnome-mines:
