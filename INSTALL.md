@@ -48,6 +48,7 @@ start with copying the repo and upgrading/installing these packages. Note that m
 - libnma
 - mozjs91
 - gjs
+- upower
 
 Navigate to roots home directory and get a copy of the repo:
 ```bash

@@ -3,6 +3,7 @@
 #libnma
 #mozjs91
 #gjs
+#upower
 amtk
 rest
 totem-pl-parser
