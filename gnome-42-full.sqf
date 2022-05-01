@@ -113,3 +113,6 @@ malcontent
 gnome-initial-setup
 liblouis
 orca
+vte
+gnome-terminal
+gnome-console
