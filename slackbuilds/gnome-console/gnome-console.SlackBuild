@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Slackware build script for gnome-console
+# Slackware build script for 'gnome-console'.
 
-# Copyright 2022 thanks to Frank Honolka https://gitlab.com/slackernetuk/gnome-light/-/tree/Current-42.0/gnome-console
+# Copyright 2022 Bob Funk Winnipeg, Canada
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -22,14 +22,12 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-
-
 cd $(dirname $0) ; CWD=$(pwd)
 
-PRGNAM=gnome-console			# replace with name of program
-VERSION=${VERSION:-42.beta}	# replace with version of program
+PRGNAM=gnome-console
+VERSION=${VERSION:-42.beta}
 BUILD=${BUILD:-1}
-TAG=${TAG:-_SBo}		# the "_SBo" is required
+TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
 
 # Automatically determine the architecture we're building on:
@@ -50,9 +48,9 @@ if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
   exit 0
 fi
 
-TMP=${TMP:-/tmp/SBo}	# For consistency's sake, use this
+TMP=${TMP:-/tmp/SBo}
 PKG=$TMP/package-$PRGNAM
-OUTPUT=${OUTPUT:-/tmp}	# Drop the package in /tmp
+OUTPUT=${OUTPUT:-/tmp}
 
 if [ "$ARCH" = "i586" ]; then
   SLKCFLAGS="-O2 -march=i586 -mtune=i686"
@@ -69,15 +67,12 @@ else
 fi
 
 set -e # Exit on most errors
-# If you prefer to do selective error checking with
-#   command || exit 1
-# then that's also acceptable.
 
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
-tar xvf $CWD/$PRGNAM-$VERSION.tar.xz
+tar xvf $CWD/$PRGNAM-$VERSION.tar.?z
 cd $PRGNAM-$VERSION
 chown -R root:root .
 find -L . \
@@ -93,23 +88,22 @@ find -L . \
 mkdir build
 cd build
   CFLAGS="$SLKCFLAGS" \
-CXXFLAGS="$SLKCFLAGS" \
-meson .. \
- --prefix=/usr \
- --buildtype=release \
- --libdir=lib${LIBDIRSUFFIX} \
- --libexecdir=/usr/libexec \
- --sysconfdir=/etc \
- --infodir=/usr/info \
- --mandir=/usr/man \
- --localstatedir=/var \
- -Dtests=false \
- -Ddevel=false 
+  CXXFLAGS="$SLKCFLAGS" \
+  meson .. \
+    --buildtype=release \
+    --infodir=/usr/info \
+    --libdir=/usr/lib${LIBDIRSUFFIX} \
+    --localstatedir=/var \
+    --mandir=/usr/man \
+    --prefix=/usr \
+    --sysconfdir=/etc \
+    -Dstrip=true
   "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
 cd ..
 
-
+# Don't ship .la files:
+rm -f $PKG/{,usr/}lib${LIBDIRSUFFIX}/*.la
 
 # Strip binaries and libraries - this can be done with 'make install-strip'
 # in many source trees, and that's usually acceptable if so, but if not,
@@ -117,16 +111,19 @@ cd ..
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
-
+# Copy program documentation into the package
+# The included documentation varies from one application to another, so be sure
+# to adjust your script as needed
+# Also, include the SlackBuild script in the documentation directory
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a COPYING NEWS README.md \
+cp -a \
+  COPYING  NEWS  README.md \
   $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 # Copy the slack-desc (and a custom doinst.sh if necessary) into ./install
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
-cat $CWD/doinst.sh > $PKG/install/doinst.sh
 
 # Make the package; be sure to leave it in $OUTPUT
 # If package symlinks need to be created during install *before*
@@ -134,3 +131,4 @@ cat $CWD/doinst.sh > $PKG/install/doinst.sh
 # the makepkg command below -- see makepkg(8) for details
 cd $PKG
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE
+
