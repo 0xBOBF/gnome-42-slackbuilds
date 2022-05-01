@@ -116,3 +116,4 @@ orca
 vte
 gnome-terminal
 gnome-console
+gnome-text-editor
