@@ -1,13 +1,13 @@
 #!/bin/bash
 
-# Slackware build script for goffice
+# Slackware build script for gnome-text-editor
 
 # Copyright 2021 Rafael Tavares (mdrafaeltavares@gmail.com) Bahia, Brazil.
 # Based on Gentoo ebuild script (Thanks!!):
 # https://gitweb.gentoo.org/repo/gentoo.git/tree/app-editors/gedit/gedit-40.1.ebuild
 # this script was used for gedit, modified (2022) for new gnome-text editor from our mate Frank Honolka
 # https://gitlab.com/slackernetuk/gnome-light/-/tree/Current-42.0/gnome-text-editor
-# and re-writed to SBo standards from  Nathaniel Russell <naterussell83@gmail.com>
+# and re-writed to SBo standards from  Anagnostakis Ioannis GR <rizitis@gmail.com>
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -31,8 +31,8 @@
 
 cd $(dirname $0) ; CWD=$(pwd)
 
-PRGNAM=goffice		# replace with name of program
-VERSION=${VERSION:-0.10.52}	# replace with version of program
+PRGNAM=gnumeric		# replace with name of program
+VERSION=${VERSION:-1.12.52}	# replace with version of program
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}		# the "_SBo" is required
 PKGTYPE=${PKGTYPE:-tgz}
@@ -119,7 +119,7 @@ find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | gr
 # to adjust your script as needed
 # Also, include the SlackBuild script in the documentation directory
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a BUGS ChangeLog INSTALL MAINTAINERS COPYING* NEWS README \
+cp -a AUTHORS BEVERAGES BUGS COPYING HACKING INSTALL MAINTAINERS NEWS README  \
   $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 

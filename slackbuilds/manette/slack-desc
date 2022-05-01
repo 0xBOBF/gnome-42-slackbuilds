@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+          |-----handy-ruler------------------------------------------------------|
+libmanette: libmanette (library utilities)
+libmanette:
+libmanette: libmanette offers painless access to game controllers, from any
+libmanette: programming language and with little dependencies. It supports the
+libmanette: de-facto standard gamepad, as defined by the W3C standard gamepad
+libmanette: specification or as implemented by the SDL GameController. Convertion 
+libmanette: of raw gamepad events into usable ones is handled transparently using
+libmanette: an embedded library of mappings in the popular SDL mapping string
+libmanette: format.
+libmanette:
+libmanette:
