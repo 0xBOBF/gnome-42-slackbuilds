@@ -6,14 +6,14 @@
 # customary to leave one space after the ':' except on otherwise blank lines.
 
            |-----handy-ruler------------------------------------------------------|
-gnome-games: gnome-games 
-gnome-games:
-gnome-games: Games is a GNOME application to browse your local video games library
-gnome-games: and to easily pick and play a game from it.
-gnome-games:
-gnome-games: Homepage: https://wiki.gnome.org/Apps/Games 
-gnome-games:
-gnome-games:
-gnome-games:
-gnome-games:
-gnome-games:
+gnome-chess: gnome-chess
+gnome-chess:
+gnome-chess: GNOME Chess is a 2D chess game, where games can be played between a 
+gnome-chess: combination of human and computer players.
+gnome-chess:
+gnome-chess: Homepage: https://gitlab.gnome.org/GNOME/gnome-chess
+gnome-chess:
+gnome-chess:
+gnome-chess:
+gnome-chess:
+gnome-chess:
