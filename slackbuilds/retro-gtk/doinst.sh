@@ -1,4 +1,4 @@
-f [ -x /usr/bin/update-desktop-database ]; then
+if [ -x /usr/bin/update-desktop-database ]; then
   /usr/bin/update-desktop-database -q usr/share/applications >/dev/null 2>&1
 fi
 
@@ -12,6 +12,3 @@ if [ -e usr/share/glib-2.0/schemas ]; then
     /usr/bin/glib-compile-schemas usr/share/glib-2.0/schemas >/dev/null 2>&1
   fi
 fi
-( cd usr/lib64 ; rm -rf libretro-gtk-1.so )
-( cd usr/lib64 ; ln -sf libretro-gtk-1.so.0 libretro-gtk-1.so )
-

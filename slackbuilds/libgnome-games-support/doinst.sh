@@ -12,8 +12,3 @@ if [ -e usr/share/glib-2.0/schemas ]; then
     /usr/bin/glib-compile-schemas usr/share/glib-2.0/schemas >/dev/null 2>&1
   fi
 fi
-( cd usr/lib64 ; rm -rf libgnome-games-support-1.so )
-( cd usr/lib64 ; ln -sf libgnome-games-support-1.so.3 libgnome-games-support-1.so )
-( cd usr/lib64 ; rm -rf libgnome-games-support-1.so.3 )
-( cd usr/lib64 ; ln -sf libgnome-games-support-1.so.3.0.4 libgnome-games-support-1.so.3 )
-

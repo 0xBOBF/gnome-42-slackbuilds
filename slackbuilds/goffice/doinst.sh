@@ -12,8 +12,3 @@ if [ -e usr/share/glib-2.0/schemas ]; then
     /usr/bin/glib-compile-schemas usr/share/glib-2.0/schemas >/dev/null 2>&1
   fi
 fi
-( cd usr/lib64 ; rm -rf libgoffice-0.10.so )
-( cd usr/lib64 ; ln -sf libgoffice-0.10.so.10.0.52 libgoffice-0.10.so )
-( cd usr/lib64 ; rm -rf libgoffice-0.10.so.10 )
-( cd usr/lib64 ; ln -sf libgoffice-0.10.so.10.0.52 libgoffice-0.10.so.10 )
-
