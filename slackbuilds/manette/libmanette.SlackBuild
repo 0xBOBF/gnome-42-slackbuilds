@@ -2,12 +2,7 @@
 
 # Slackware build script for libmanette 
 
-# Copyright 2021 Rafael Tavares (mdrafaeltavares@gmail.com) Bahia, Brazil.
-# Based on Gentoo ebuild script (Thanks!!):
-# https://gitweb.gentoo.org/repo/gentoo.git/tree/app-editors/gedit/gedit-40.1.ebuild
-# this script was used for gedit, modified (2022) for new gnome-text editor from our mate Frank Honolka
-# https://gitlab.com/slackernetuk/gnome-light/-/tree/Current-42.0/gnome-text-editor
-# and re-writed to SBo standards from  Nathaniel Russell <naterussell83@gmail.com>
+# Copyright 2022 Nathaniel Russell 
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
