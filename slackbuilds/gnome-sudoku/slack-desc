@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+            |-----handy-ruler------------------------------------------------------|
+gnome-sudoku: gnome-sudoku
+gnome-sudoku:
+gnome-sudoku: Sudoku is a Japanese logic game that exploded in popularity in 2005. 
+gnome-sudoku: GNOME Sudoku was originally programmed in Python by Thomas Hinkle, 
+gnome-sudoku: though it has since been rewritten.
+gnome-sudoku: 
+gnome-sudoku:
+gnome-sudoku: Homepage: https://gitlab.gnome.org/GNOME/gnome-sudoku
+gnome-sudoku:
+gnome-sudoku:
+gnome-sudoku:

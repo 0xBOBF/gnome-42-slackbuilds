@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Slackware build script for gnome-games
+# Slackware build script for gnome-chess
 
 # Copyright 2022 Nathaniel Russell 
 # All rights reserved.
@@ -26,8 +26,8 @@
 
 cd $(dirname $0) ; CWD=$(pwd)
 
-PRGNAM=gnome-games		# replace with name of program
-VERSION=${VERSION:-40.0}	# replace with version of program
+PRGNAM=gnome-sudoku		# replace with name of program
+VERSION=${VERSION:-42.0}	# replace with version of program
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}		# the "_SBo" is required
 PKGTYPE=${PKGTYPE:-tgz}
@@ -90,8 +90,7 @@ find -L . \
 # these are provided as an example only.
 # Be sure to build only shared libraries unless there's some need for
 # static.
-cat $CWD/tracker3.patch | patch -p1
-cat $CWD/meson.patch | patch -p1
+#cat $CWD/meson.patch | patch -p0
 mkdir -p build
 cd build
 CFLAGS="$SLKCFLAGS" \
@@ -109,16 +108,14 @@ CFLAGS="$SLKCFLAGS" \
   DESTDIR=$PKG $NINJA install
 cd ..
 
+
+
 # Strip binaries and libraries - this can be done with 'make install-strip'
 # in many source trees, and that's usually acceptable if so, but if not,
 # use this:
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
-rm -rf $PKG/usr/lib${LIBDIRSUFFIX}/*.la
-
-find $PKG/usr/man -type f -exec gzip -9 {} \;
-for i in $(find $PKG/usr/man -type l); do ln -s $(readlink $i).gz $i.gz; rm $i; done
 
 
 # Copy program documentation into the package
@@ -126,14 +123,14 @@ for i in $(find $PKG/usr/man -type l); do ln -s $(readlink $i).gz $i.gz; rm $i; 
 # to adjust your script as needed
 # Also, include the SlackBuild script in the documentation directory
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a  HACKING.md AUTHORS COPYING NEWS README.md \
+cp -a  COPYING* NEWS README.md \
   $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 # Copy the slack-desc (and a custom doinst.sh if necessary) into ./install
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
-#cat $CWD/doinst.sh > $PKG/install/doinst.sh
+cat $CWD/doinst.sh > $PKG/install/doinst.sh
 
 # Make the package; be sure to leave it in $OUTPUT
 # If package symlinks need to be created during install *before*

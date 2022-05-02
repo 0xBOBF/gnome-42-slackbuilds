@@ -1,0 +1,10 @@
+PRGNAM="gnome-sudoku"
+VERSION="42.0"
+HOMEPAGE="https://gitlab.gnome.org/GNOME/gnome-sudoku"
+DOWNLOAD=""
+MD5SUM=""
+DOWNLOAD_x86_64="https://download.gnome.org/sources/gnome-sudoku/42/gnome-sudoku-42.0.tar.xz"
+MD5SUM_x86_64="1d2eb4ddb8026b443645cf3585b8df1244e3828ee1c07518052b2599e1c5c28f
+REQUIRES="libgnome-games-support qqwing"
+MAINTAINER="Nathaniel Russell"
+EMAIL="naterussell83@gmail.com"
