@@ -119,7 +119,7 @@ cd ..
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
-
+rm -rf $PKG/usr/lib${LIBDIRSUFFIX}/*.la
 
 # Copy program documentation into the package
 # The included documentation varies from one application to another, so be sure
