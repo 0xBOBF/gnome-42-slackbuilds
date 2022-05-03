@@ -108,8 +108,6 @@ CFLAGS="$SLKCFLAGS" \
   DESTDIR=$PKG $NINJA install
 cd ..
 
-
-
 # Strip binaries and libraries - this can be done with 'make install-strip'
 # in many source trees, and that's usually acceptable if so, but if not,
 # use this:
