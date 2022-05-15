@@ -1,0 +1,4 @@
+emote desktop and screen sharing in libmutter is split into two separate, but optionally combined parts: screen casting, and remote control. Both are exposed via their own D-Bus APIs. The data transfer and format negotiation of the screen casting is done by PipeWire. 
+
+Required Dependencies:
+- nv-codec-headers

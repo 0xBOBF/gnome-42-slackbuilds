@@ -1,8 +1,8 @@
-#!/bin/sh
+#!/bin/bash
 
-# Slackware build script for gnome-shell-42.0.tar.xz
+# Slackware build script for gnome-weather
 
-# Copyright 2016, 2021 Rafael Tavares (mdrafaeltavares@gmail.com) Bahia, Brazil.
+# Copyright 2021 Rafael Tavares (mdrafaeltavares@gmail.com) Bahia, Brazil.
 # Modified by Ioannis Anagnostakis <rizitis@gmail.com> GR (2022)
 # All rights reserved.
 #
@@ -23,20 +23,23 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+
 cd $(dirname $0) ; CWD=$(pwd)
 
-PRGNAM=gnome-shell
-VERSION=${VERSION:-42.1}
+PRGNAM=nv-codec-headers
+VERSION=${VERSION:-11.1.5.1}
 BUILD=${BUILD:-1}
-TAG=${TAG:-_SBo}
+TAG=${TAG:-_SBo}	
 PKGTYPE=${PKGTYPE:-tgz}
 
+# Automatically determine the architecture we're building on:
 if [ -z "$ARCH" ]; then
-case "$( uname -m )" in
+  case "$( uname -m )" in
     i?86) ARCH=i586 ;;
     arm*) ARCH=arm ;;
-    *) ARCH=$( uname -m ) ;;
-esac
+    # Unless $ARCH is already set, use uname -m for all other archs:
+       *) ARCH=$( uname -m ) ;;
+  esac
 fi
 
 # If the variable PRINT_PACKAGE_NAME is set, then this script will report what
@@ -47,7 +50,6 @@ if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
   exit 0
 fi
 
-CWD=$(pwd)
 TMP=${TMP:-/tmp/SBo}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
@@ -66,45 +68,38 @@ else
   LIBDIRSUFFIX=""
 fi
 
-set -e
+set -e # Exit on most errors
 
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
-tar xvf $CWD/$PRGNAM-$VERSION.tar.xz
+tar xvf $CWD/$PRGNAM-$VERSION.tar.gz
 cd $PRGNAM-$VERSION
+chown -R root:root .
+find -L . \
+ \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
+  -o -perm 511 \) -exec chmod 755 {} \; -o \
+ \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
+  -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-mkdir build
-cd build
-  CFLAGS="$SLKCFLAGS" \
-CXXFLAGS="$SLKCFLAGS" \
-meson .. \
- --prefix=/usr \
- --buildtype=release \
- --libdir=lib${LIBDIRSUFFIX} \
- --sysconfdir=/etc \
- --infodir=/usr/info \
- --mandir=/usr/man \
- --localstatedir=/var \
- -Ddefault_library=shared \
- -Dgtk_doc=false \
- -Dman=true \
- -Dtests=false \
- -Dsystemd=false
-
-  "${NINJA:=ninja}"
-  DESTDIR=$PKG $NINJA install
-cd ..
-
-rm -f $PKG/{,usr/}lib${LIBDIRSUFFIX}/*.la
+cat $CWD/nv-codec-prefix.patch | patch -p0
+make
+make install DESTDIR=$PKG
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
+mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
+cp -a README \
+  $PKG/usr/doc/$PRGNAM-$VERSION
+cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
+
+# Copy the slack-desc (and a custom doinst.sh if necessary) into ./install
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
-cat $CWD/doinst.sh > $PKG/install/doinst.sh
+#cat $CWD/doinst.sh > $PKG/install/doinst.sh
 
+# Make the package
 cd $PKG
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE

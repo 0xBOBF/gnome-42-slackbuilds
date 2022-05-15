@@ -1,9 +1,8 @@
 #!/bin/sh
 
-# Slackware build script for gnome-shell-42.0.tar.xz
+# Slackware build script for gnome-shell-extension-appindicator-42
 
-# Copyright 2016, 2021 Rafael Tavares (mdrafaeltavares@gmail.com) Bahia, Brazil.
-# Modified by Ioannis Anagnostakis <rizitis@gmail.com> GR (2022)
+# Copyright 2022 Nathaniel Russell 
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -25,8 +24,8 @@
 
 cd $(dirname $0) ; CWD=$(pwd)
 
-PRGNAM=gnome-shell
-VERSION=${VERSION:-42.1}
+PRGNAM=autohide-battery
+VERSION=${VERSION:-42.27}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
@@ -71,40 +70,36 @@ set -e
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-rm -rf $PRGNAM-$VERSION
-tar xvf $CWD/$PRGNAM-$VERSION.tar.xz
-cd $PRGNAM-$VERSION
+rm -rf $PRGNAM-main
+unzip -x $CWD/main.zip
+cd $PRGNAM-main
+chown -R root:root .
+find -L . \
+ \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
+  -o -perm 511 \) -exec chmod 755 {} \; -o \
+ \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
+  -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-mkdir build
-cd build
-  CFLAGS="$SLKCFLAGS" \
-CXXFLAGS="$SLKCFLAGS" \
-meson .. \
- --prefix=/usr \
- --buildtype=release \
- --libdir=lib${LIBDIRSUFFIX} \
- --sysconfdir=/etc \
- --infodir=/usr/info \
- --mandir=/usr/man \
- --localstatedir=/var \
- -Ddefault_library=shared \
- -Dgtk_doc=false \
- -Dman=true \
- -Dtests=false \
- -Dsystemd=false
-
-  "${NINJA:=ninja}"
-  DESTDIR=$PKG $NINJA install
-cd ..
-
-rm -f $PKG/{,usr/}lib${LIBDIRSUFFIX}/*.la
-
+mkdir -p $PKG/usr/share/gnome-shell/extensions
+mkdir -p $PKG/usr/share/glib-2.0/schemas
+cd $TMP/$PRGNAM-main
+cd $PKG/usr/share/gnome-shell/extensions
+tar xvf $CWD/autohide.txz
+cp -av $PKG/usr/share/gnome-shell/extensions/autohide-battery@sitnik.ru/schemas  $PKG/usr/share/glib-2.0
+ 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
+
+cd $TMP/$PRGNAM-main
+mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
+cp -a README.md \
+      $PKG/usr/doc/$PRGNAM-$VERSION
+cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
+
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
-cat $CWD/doinst.sh > $PKG/install/doinst.sh
 
 cd $PKG
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE
+

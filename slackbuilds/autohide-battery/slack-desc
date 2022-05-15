@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+                |-----handy-ruler------------------------------------------------------|
+autohide-battery: autohide-battery ( support for battery percentage hiding )
+autohide-battery:
+autohide-battery: GNOME Shell extension to hide battery icon, if battery is 
+autohide-battery: fully charged and AC is connected.
+autohide-battery: 
+autohide-battery:
+autohide-battery:
+autohide-battery:
+autohide-battery: https://github.com/ai/autohide-battery
+autohide-battery:
+autohide-battery:

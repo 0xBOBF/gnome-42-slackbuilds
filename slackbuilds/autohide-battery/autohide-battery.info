@@ -1,0 +1,11 @@
+PRGNAM="autohide-battery"
+VERSION="42.27"
+HOMEPAGE="https://github.com/ai/autohide-battery"
+DOWNLOAD="https://github.com/ai/autohide-battery/archive/refs/heads/main.zip"
+MD5SUM="edb32e7936bc442f4f36251a81916014"
+DOWNLOAD_x86_64=""
+MD5SUM_x86_64=""
+REQUIRES=""
+MAINTAINER="Nathaniel Russell"
+EMAIL="naterussell83@gmail.com"
+
