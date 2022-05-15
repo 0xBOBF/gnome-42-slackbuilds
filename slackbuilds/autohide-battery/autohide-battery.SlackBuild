@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Slackware build script for gnome-shell-extension-appindicator-42
+# Slackware build script for autohide-battery 
 
 # Copyright 2022 Nathaniel Russell 
 # All rights reserved.
