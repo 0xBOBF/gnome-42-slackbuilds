@@ -1,1 +1,2 @@
-GNOME Shell extension to hide battery icon, if battery is fully charged and AC is connected.
+GNOME Shell extension to hide battery icon, if battery is fully charged and AC is connected. 
+The battery percentage will hide it self.
