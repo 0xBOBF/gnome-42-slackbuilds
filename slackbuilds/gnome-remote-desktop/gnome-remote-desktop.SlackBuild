@@ -100,6 +100,7 @@ meson .. \
  -Dsystemd=false \
  -Drdp=true \
  -Dvnc=true 
+ 
 "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
 cd ..
