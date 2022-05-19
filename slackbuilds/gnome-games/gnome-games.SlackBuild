@@ -103,8 +103,26 @@ CFLAGS="$SLKCFLAGS" \
     --localstatedir=/var \
     --mandir=/usr/man \
     --prefix=/usr \
-    --sysconfdir=/etc 
-
+    --sysconfdir=/etc \
+ -Ddefault_library=shared \
+ -Ddesktop-plugin=true \
+ -Ddreamcast-plugin=true \
+ -Dgame-cube-plugin=true \
+ -Dlibretro-plugin=true \
+ -Dlove-plugin=true \
+ -Dmame-plugin=true \
+ -Dms-dos-plugin=true \
+ -Dnintendo-3ds-plugin=true \
+ -Dnintendo-64-plugin=true \
+ -Dnintendo-ds-plugin=true \
+ -Dplaystation-plugin=true \
+ -Dsega-cd-plugin=true \
+ -Dsega-saturn-plugin=true \
+ -Dsteam-plugin=true \
+ -Dturbografx-cd-plugin=true \
+ -Dvirtual-boy-plugin=true \
+ -Dwii-plugin=true
+ 
 "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
 cd ..
