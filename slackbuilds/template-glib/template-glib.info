@@ -5,6 +5,6 @@ DOWNLOAD="https://download.gnome.org/sources/template-glib/3.34/template-glib-3.
 MD5SUM="df120adac6faec85aedda693a7ffa518"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES=" %README%"
+REQUIRES=""
 MAINTAINER="Anagnostakis Ioannis"
 EMAIL="rizitis@gmail.com"
