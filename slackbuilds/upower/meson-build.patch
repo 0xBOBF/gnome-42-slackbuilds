@@ -1,0 +1,11 @@
+--- src/meson.build.old	2022-05-17 08:54:28.000000000 -0000
++++ src/meson.build	2022-05-19 18:06:31.328789603 -0000
+@@ -124,7 +124,7 @@
+ 
+     python3 = find_program('python3')
+     unittest_inspector = find_program('linux/unittest_inspector.py')
+-    r = run_command(unittest_inspector, files('linux/integration-test.py'), check: true)
++    r = run_command(unittest_inspector, files('linux/integration-test.py'), check: false)
+     unit_tests = r.stdout().strip().split('\n')
+ 
+     foreach ut: unit_tests
