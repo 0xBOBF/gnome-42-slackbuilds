@@ -97,8 +97,9 @@ meson .. \
  --infodir=/usr/info \
  --mandir=/usr/man \
  --localstatedir=/var \
- -Dsystemd=false
- 
+ -Dsystemd=false \
+ -Drdp=true \
+ -Dvnc=true 
 "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install
 cd ..
