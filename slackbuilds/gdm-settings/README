@@ -1,0 +1,4 @@
+Login Manager Settings (gdm-settings)
+
+If after installation not running then as root command
+~# glib-compile-schemas /usr/share/glib-2.0/schemas
