@@ -16,7 +16,20 @@ users and groups:
 ```
 Note that the 'gdm' user and group is already present on stock slackware.
 
-Having the above users and groups is enough to build GNOME 42. You will also need to start/stop avahi on your system by adding the following to `/etc/rc.d/rc.local`:
+Unfortunately, slackware comes with gdm misconfigured in its init scripts. If you want to boot into runlevel 4 and launch gdm then you will have to edit `/etc/rc.d/rc.4`, removing the `-nodaemon` option passed to gdm. This is an invalid option and will cause gdm to exit instead of start. Specifically this part, since gdm is installed here:
+```bash
+if [ -x /usr/sbin/gdm ]; then
+  exec /usr/sbin/gdm -nodaemon
+fi
+```
+Needs to be changed to:
+```bash
+if [ -x /usr/sbin/gdm ]; then
+  exec /usr/sbin/gdm
+fi
+```
+
+You will also need to start/stop avahi on your system by adding the following to `/etc/rc.d/rc.local`:
 ```bash
 # Start avahidaemon
 if [ -x /etc/rc.d/rc.avahidaemon ]; then
@@ -150,9 +163,9 @@ testing master "SBo with GNOME Repo" _SBo git "" ""
 
 Finally, make a copy of the `sbopkg.conf` file and edit it so it uses this new repo:
 ``` bash
-cp /etc/sbopkg/sbopkg.conf /root/.sbopkg.conf
+cp /etc/sbopkg/sbopkg.conf /root/sbopkg.conf
 ```
-Then edit `/root/.sbopkg.conf` so that the repo name and branch match:
+Then edit `/root/sbopkg.conf` so that the repo name and branch match:
 ``` bash
 REPO_BRANCH=${REPO_BRANCH:-master}
 REPO_NAME=${REPO_NAME:-testing}
@@ -168,9 +181,9 @@ And the gnome-shell package should be found and queued for building.
 ## Set Environment Variables
 Some of the builds in the queue require passing variables to set build options like introspection. Therefore, before you start the build, make sure to set the following variables:
 ```bash
-export INTROSPECTION=true
-export VALA=true
-export VAPI=true
+export INTROSPECTION=yes
+export VALA=yes
+export VAPI=yes
 ```
 ## Run sbopkg Using the Queue-file
 Once sbopkg is configured, you can install the full set using the queue files
@@ -178,6 +191,6 @@ provided in this repo.
 
 For example:
 ```bash
-sbopkg -f /root/.sbopkg.conf -i gnome-42-full.sqf
+sbopkg -f /root/sbopkg.conf -i gnome-42-full.sqf
 ```
 
