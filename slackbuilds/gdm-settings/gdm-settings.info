@@ -5,6 +5,6 @@ DOWNLOAD="https://github.com/realmazharhussain/gdm-settings/archive/refs/tags/v0
 MD5SUM="5a4e6445b0a8d12513ce311720255047"
 DOWNLOAD_x86_64=""
 MD5SUM_x86_64=""
-REQUIRES=""
+REQUIRES="blueprint-compiler"
 MAINTAINER="Anagnostakis Ioannis"
 EMAIL="rizitis@gmail.com"
