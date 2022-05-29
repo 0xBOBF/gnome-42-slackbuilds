@@ -90,107 +90,54 @@ installpkg sbopkg-0.38.2-noarch-1_wsr.tgz
 ## Prepare sbopkg
 
 ### Setting up a Local Repo:
-Setting up a local repo for 'sbopkg' requires three steps:
+A number of builds in this repo are not in SBo, so we are going to merge the two repos, giving gnome-42-slackbuilds priority over SBo versions.
 
- 1. Set up a repo in the proper format for sbopkg.
- 1. Define the repo in `/etc/sbopkg/repos.d/`
- 2. Point 'sbopkg' to the repo in `sbopkg.conf`
-
-For the first step we will make our repo in sbopkg's default root directory and
-set that up with the latest SBo-master, plus our additional gnome packages.
-
-The default location for sbopkg repos is `/var/lib/sbopkg/`. Navigate to this directory, creating it if needed.
+First, sync SBo's repo to the latest version of the SBo master using:
 ``` bash
-cd /var/lib/sbopkg
+sbopkg -V SBo/master -r
 ```
-Then clone SBo's master branch:
+The SBo repo will be downloaded to `/var/lib/sbopkg/SBo`. After the SBo repo is synced, navigate to the repo and add a copy the gnome-42 slackbuilds directory. Use a numbered name so that sbopkg will find the gnome-42 versions of slackbuilds first. In this example I use `10-gnome` as the directory name.
 ``` bash
-git clone https://gitlab.com/SlackBuilds.org/slackbuilds.git -b master ./testing
+cd /var/lib/sbopkg/SBo
+cp -r ~/gnome-42-slackbuilds/slackbuilds ./10-gnome
 ```
-Now we want to add our slackbuilds to the repo so we can use both SBo and GNOME
-builds. If you followed the first steps then you will have a copy of the GNOME repo in root's home directoy. We will copy this into the SBo repo with the following:
+Note: At this point, avoid running `sbopkg -r` again, because that will overwrite our merged repo. If you do run `sbopkg -r` (or `sbopkg -V SBo/master -r`), you will need to re-copy the gnome builds into the repo.
 
+The final step before using the repo is to point sbopkg to it. Navigate to sbopkg's repo config directory and create a custom repo using a name starting with a number lower than the existing repos. In this example I use the name `10-local-gnome.repo`.
 ``` bash
- cp -r ~/gnome-42-slackbuilds/slackbuilds ./testing/10-gnome
+cd /etc/sbopkg/repos.d/
+vim ./10-local-gnome.repo
 ```
-Note: Putting '10' infront of the name will ensure that versions of builds in the gnome repo are prioritized over builds that are in the SBo repo, which is used to handle the situation where we use a newer version of a build.
-
-Now enter the repo and add the new gnome directory to git so sbopkg will find it.
+Then in the 10-local-gnome.repo file, enter the following:
 ``` bash
- cd testing
- git add .
- git commit -m "Add GNOME Builds"
+SBo "" "SBo master with GNOME" _SBo "" "" ""
 ```
-Note: If you get a warning like this, its because you dont have a git profile saved.
-``` bash
-Author identity unknown
-
-*** Please tell me who you are.
-
-Run
-
-  git config --global user.email "you@example.com"
-  git config --global user.name "Your Name"
-
-to set your account's default identity.
-Omit --global to set the identity only in this repository.
-
-fatal: empty ident name (for <root@slackbox.local>) not allowed
-```
-You can just enter in the example commands as written, and redo the commit.
-``` bash
- git config --global user.email "you@example.com"
- git config --global user.name "Your Name"
- git commit -m "Add GNOME Builds"
-
-```
-Now set up the queue file for sbopkg copying the queue file from the gnome repo to `/var/lib/sbopkg/queues` (Create this directory if it doesn't exist yet).
+Save the file and you are ready to start building with sbopkg. You can build packages individually, or, there is a full queue file available with the gnome-42 repo. To use this queue file, copy it to `/var/lib/sbopkg/queues/`, and specifiy it for sbopkg:
 ```bash
 cp ~/gnome-42-slackbuilds/gnome-42-full.sqf /var/lib/sbopkg/queues/
+export INTROSPECTION=yes
+export VALA=yes
+export VAPI=yes
+export AVAHI=yes
+export WEBKITGTK=true
+sbopkg -V SBo/master -i gnome-42-full
 ```
 
-The next step is to define the new repo for sbopkg. To do this we make a copy of the
-example local repo definition and set it up for ourselves:
+#### Environment Variables
+Some of the builds in the queue require passing variables to set build options like introspection. These were shown in the previous example. An explanation of these are as follows:
 ``` bash
- cp /etc/sbopkg/repos.d/50-local.repo /etc/sbopkg/repos.d/51-local.repo
-```
-
-Then use a text editor to edit `/etc/sbopkg/repos.d/51-local.repo` and point it to the repo. This config works with the steps above:
-``` bash
-# Repo Branch Description Tag Tool Link CheckGPG
-testing master "SBo with GNOME Repo" _SBo git "" ""
-```
-
-Finally, make a copy of the `sbopkg.conf` file and edit it so it uses this new repo:
-``` bash
-cp /etc/sbopkg/sbopkg.conf /root/sbopkg.conf
-```
-Then edit `/root/sbopkg.conf` so that the repo name and branch match:
-``` bash
-REPO_BRANCH=${REPO_BRANCH:-master}
-REPO_NAME=${REPO_NAME:-testing}
-```
-
-At this point sbopkg is ready to be used for installing gnome-packages. For example,
-you could issue:
-``` bash
-sbopkg -f /root/sbopkg.conf -i gnome-shell
-```
-And the gnome-shell package should be found and queued for building.
-
-## Set Environment Variables
-Some of the builds in the queue require passing variables to set build options like introspection. Therefore, before you start the build, make sure to set the following variables:
-```bash
 export INTROSPECTION=yes
 export VALA=yes
 export VAPI=yes
 ```
-## Run sbopkg Using the Queue-file
-Once sbopkg is configured, you can install the full set using the queue files
-provided in this repo.
+These are used by the clutter packages, and other packages from SBo like geocode-glib, gweather, libchamplain, gnome-online-accounts to enable building gobject introspection and vala bindings. This is needed by 'gnome-maps' and its dependency 'folks' to properly build and run. The cheese package and its dep clutter-gst also need introspection on the other clutter packages to build.
 
-For example:
-```bash
-sbopkg -f /root/sbopkg.conf -i gnome-42-full.sqf
+``` bash
+export AVAHI=yes
 ```
+This is used to build avahi support into geoclue2.
 
+``` bash
+export WEBKITGTK=true
+```
+This is used by zenity to add webkit2gtk support.
