@@ -32,9 +32,6 @@ PKGTYPE=${PKGTYPE:-tgz}
 
 TESTS=${TESTS:-false}
 GTKDOC=${GTKDOC:-false}
-INTROSPECTION=${INTROSPECTION:-false}
-VAPI=${VAPI:-false}
-OAUTH1=${OAUTH1=disabled}
 MAN=${MAN:-false}
 
 if [ -z "$ARCH" ]; then
@@ -106,9 +103,6 @@ cd build
     -Dgoa=enabled \
     -Dalways_build_tests="$TESTS" \
     -Dgtk_doc="$GTKDOC" \
-    -Dintrospection="$INTROSPECTION" \
-    -Dvapi="$VAPI" \
-    -Doauth1="$OAUTH1" \
     -Dman="$MAN"
   "${NINJA:=ninja}"
   DESTDIR=$PKG $NINJA install

@@ -30,8 +30,6 @@ BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
 
-INTROSPECTION=${INTROSPECTION:-false}
-VAPI=${VAPI:-false}
 GTKDOC=${GTKDOC:-false}
 
 if [ -z "$ARCH" ]; then
@@ -98,8 +96,6 @@ cd build
     --prefix=/usr \
     --sysconfdir=/etc \
     --wrap-mode=nodownload \
-    -Dintrospection="$INTROSPECTION" \
-    -Dvapi="$VAPI" \
     -Dwidgetry=true \
     -Dgtk_doc="$GTKDOC" \
     -Dstrip=true
