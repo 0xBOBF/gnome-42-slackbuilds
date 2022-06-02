@@ -1,0 +1,8 @@
+PRGNAM="smartypants"
+VERSION="2.0.1"
+HOMEPAGE="https://bitbucket.org/livibetter/smartypants.py"
+DOWNLOAD="https://github.com/leohemsted/smartypants.py/archive/refs/tags/v2.0.1.tar.gz"
+MD5SUM="27957540f4718e892039b2ed208c78f3"
+REQUIRES=""
+MAINTAINER="Frank Honolka"
+EMAIL="slackernetuk@gmail.com"
