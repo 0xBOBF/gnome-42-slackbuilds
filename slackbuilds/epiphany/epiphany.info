@@ -1,0 +1,8 @@
+PRGNAM="epiphany"
+VERSION="42.2"
+HOMEPAGE="https://wiki.gnome.org/Apps/Web"
+DOWNLOAD="https://download.gnome.org/sources/epiphany/42/epiphany-42.2.tar.xz"
+MD5SUM="bd2b183755142aa6bdc2846a4153018a"
+REQUIRES=""
+MAINTAINER="Nathaniel Russell"
+EMAIL="@terussell83gmail.com"
