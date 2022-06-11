@@ -5,8 +5,11 @@ Required dependencies:
 - lua53
 - tracker3
 - liboauth
-- libdmapsharing
 - gom
+
+Optional dependencies:
+- libdmapsharing
+
 Currently missing a few plugins:
 bookmarks
 dmap
