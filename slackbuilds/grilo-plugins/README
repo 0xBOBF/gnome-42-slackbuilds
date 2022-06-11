@@ -4,7 +4,9 @@ Required dependencies:
 - grilo
 - lua53
 - tracker3
-
+- liboauth
+- libdmapsharing
+- gom
 Currently missing a few plugins:
 bookmarks
 dmap
