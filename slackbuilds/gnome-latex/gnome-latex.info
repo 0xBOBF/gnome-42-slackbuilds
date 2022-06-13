@@ -1,0 +1,8 @@
+PRGNAM="gnome-latex"
+VERSION="3.41.1"
+HOMEPAGE="https://gitlab.gnome.org/swilmet/gnome-latex"
+DOWNLOAD="https://download.gnome.org/sources/gnome-latex/3.41/gnome-latex-3.41.1.tar.xz"
+MD5SUM="ca620b55e0e39d4aae481d440f4234bd"
+REQUIRES="tepl gspell"
+MAINTAINER="Jay Lanagan"
+EMAIL="j@lngn.net"

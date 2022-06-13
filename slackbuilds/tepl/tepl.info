@@ -1,0 +1,8 @@
+PRGNAM="tepl"
+VERSION="6.1.1"
+HOMEPAGE="https://gitlab.gnome.org/swilmet/tepl"
+DOWNLOAD="https://download.gnome.org/sources/tepl/6.1/tepl-6.1.1.tar.xz"
+MD5SUM="2a5daf402f376f0ecfed0964c96d600e"
+REQUIRES=""
+MAINTAINER="Jay Lanagan"
+EMAIL="j@lngn.net"
