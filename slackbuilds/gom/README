@@ -1,2 +1,3 @@
-Gom provides an object mapper from GObjects to SQLite. It helps you write applications that need to store structured data as well as make 
-complex queries upon that data. 
+
+Gom provides an object mapper from GObjects to SQLite. It helps you write applications that need to store structured data as 
+well as make complex queries upon that data. 
