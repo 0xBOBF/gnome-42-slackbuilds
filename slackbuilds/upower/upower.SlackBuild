@@ -105,7 +105,6 @@ meson setup \
   -Dudevhwdbdir=/etc/udev/hwdb.d \
   -Dudevrulesdir=/etc/udev/rules.d \
   -Dos_backend=linux \
-  -Dintrospection=enabled \
   .. || exit 1
 
   "${NINJA:=ninja}" $NUMJOBS || exit 1
