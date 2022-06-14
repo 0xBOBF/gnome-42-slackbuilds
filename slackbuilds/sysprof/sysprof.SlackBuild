@@ -96,7 +96,7 @@ meson .. \
  -Denable_gtk=true \
  -Dlibsysprof=true \
  -Dwith_sysprofd=bundled \
- -Dsystemdunitdir=/tmp \
+ -Dsystemdunitdir=/usr/lib/systemd/system \
  -Dhelp=true \
  -Dlibunwind=true \
  -Denable_tools=true \
