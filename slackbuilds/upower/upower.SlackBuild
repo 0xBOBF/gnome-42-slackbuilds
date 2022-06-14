@@ -132,7 +132,7 @@ for i in $( find $PKG/usr/man -type l ) ; do ln -s $( readlink $i ).gz $i.gz ; r
 
 mkdir -p $PKG/usr/doc/$PKGNAM-$VERSION
 cp -a \
-  AUTHORS COPYING ChangeLog HACKING INSTALL NEWS README \
+  AUTHORS COPYING HACKING RELEASE COMMITMENT NEWS README \
   $PKG/usr/doc/$PKGNAM-$VERSION
 
 mkdir -p $PKG/install
