@@ -1,0 +1,83 @@
+diff -urN dash-to-panel-50/panelManager.js dash-to-panel/panelManager.js
+--- dash-to-panel-50/panelManager.js	2022-04-29 02:46:18.000000000 -0000
++++ dash-to-panel/panelManager.js	2022-06-14 17:37:51.551148328 -0000
+@@ -188,7 +188,7 @@
+                 'monitors-changed', 
+                 () => {
+                     if (Main.layoutManager.primaryMonitor) {
+-                        this._saveMonitors(true);
++                        this._saveMonitors();
+                         this._reset();
+                     }
+                 }
+@@ -350,35 +350,31 @@
+         }
+     }
+ 
+-    _saveMonitors(savePrimaryChange) {
++    _saveMonitors() {
+         //Mutter meta_monitor_manager_get_primary_monitor (global.display.get_primary_monitor()) doesn't return the same
+         //monitor as GDK gdk_screen_get_primary_monitor (imports.gi.Gdk.Screen.get_default().get_primary_monitor()).
+         //Since the Mutter function is what's used in gnome-shell and we can't access it from the settings dialog, store 
+         //the monitors information in a setting so we can use the same monitor indexes as the ones in gnome-shell
+         let keyMonitors = 'available-monitors';
++        let keyPrimary = 'primary-monitor';
+         let primaryIndex = Main.layoutManager.primaryIndex;
+         let newMonitors = [primaryIndex];
++        let savedMonitors = Me.settings.get_value(keyMonitors).deep_unpack();
++        let dtpPrimaryIndex = Me.settings.get_int(keyPrimary);
++        let newDtpPrimaryIndex = primaryIndex;
+ 
+         Main.layoutManager.monitors.filter(m => m.index != primaryIndex).forEach(m => newMonitors.push(m.index));
+-        
+-        if (savePrimaryChange) {
+-            let keyPrimary = 'primary-monitor';
+-            let savedMonitors = Me.settings.get_value(keyMonitors).deep_unpack();
+-            let dtpPrimaryIndex = Me.settings.get_int(keyPrimary);
+-            let newDtpPrimaryIndex = primaryIndex;
+-
+-            if (savedMonitors[0] != dtpPrimaryIndex) {
+-                // dash to panel primary wasn't the gnome-shell primary (first index of available-monitors)
+-                let savedIndex = savedMonitors.indexOf(dtpPrimaryIndex)
+-
+-                // default to primary if it was set to a monitor that is no longer available
+-                newDtpPrimaryIndex = newMonitors[savedIndex];
+-                newDtpPrimaryIndex = newDtpPrimaryIndex == null ? primaryIndex : newDtpPrimaryIndex;
+-            }
+-            
+-            Me.settings.set_int(keyPrimary, newDtpPrimaryIndex);
+-        }
+ 
++        if (savedMonitors[0] != dtpPrimaryIndex) {
++            // dash to panel primary wasn't the gnome-shell primary (first index of available-monitors)
++            let savedIndex = savedMonitors.indexOf(dtpPrimaryIndex)
++
++            // default to primary if it was set to a monitor that is no longer available
++            newDtpPrimaryIndex = newMonitors[savedIndex];
++            newDtpPrimaryIndex = newDtpPrimaryIndex == null ? primaryIndex : newDtpPrimaryIndex;
++        }
++        
++        Me.settings.set_int(keyPrimary, newDtpPrimaryIndex);
+         Me.settings.set_value(keyMonitors, new GLib.Variant('ai', newMonitors));
+     }
+ 
+diff -urN dash-to-panel-50/README.md dash-to-panel/README.md
+--- dash-to-panel-50/README.md	2022-04-29 02:46:18.000000000 -0000
++++ dash-to-panel/README.md	2022-06-14 17:37:51.508148869 -0000
+@@ -174,6 +174,7 @@
+ - @marksvc for assigning percent of display for panel length
+ - @philippun1 for GNOME 40 support :rocket:
+ - @HaselLoyance for toggle for notification counter badge
++- @rastersoft for Desktop Icons NG integration
+ 
+ #### Bug Fixes: 
+ @imrvelj, @Teslator, @bil-elmoussaoui, @brandon-schumann, @sw9, @rockon999 , @lexruee, @3v1n0, @freeroot, @moqmar, @ArtyomZorin, @lkc0987, @saibotk, @vanillajonathan, @Zkdc, @leebickmtu, @l3nn4rt, @Melix19, @Aikatsui, @melix99, @kyrillzorin, @oneshadab, @CorvetteCole, @vantu5z, @spectreseven1138
+@@ -182,7 +183,7 @@
+ @BoQsc, @zakkak, @dandv
+ 
+ #### Translations: 
+-@frnogueira / @victorwpbastos / @vagkaefer (pt_BR), @zeten30 (cs), @franglais125 / @calotam / @oeramirez (es), @LaurentTreguier / @SolarLiner (fr), @elsieholmes (uk), @hosiet (zh\_CN), @jonnius / @linuxr01 / @daPhipz (de), @urbalazs / @pappfer (hu), @crayxt (kk), @pkomur / @MartinPL / @alex4401 (pl), @AlexGluck / @GoodNike / @rjapolov / @vantu5z (ru), @sicklylife-jp / @ryonakano / @nexryai (ja), @oltulu / @TeknoMobil / @daenney (tr), @sbadux / @kowalski7cc / @l3nn4rt (it), @OriginCode / @pan93412 (zh\_TW), @ojn (sv), @frandieguez (gl), @kuroehanako (ko)
++@frnogueira / @victorwpbastos / @vagkaefer (pt_BR), @zeten30 (cs), @franglais125 / @calotam / @oeramirez (es), @LaurentTreguier / @SolarLiner (fr), @elsieholmes (uk), @hosiet (zh\_CN), @jonnius / @linuxr01 / @daPhipz (de), @urbalazs / @pappfer (hu), @crayxt (kk), @pkomur / @MartinPL / @alex4401 (pl), @AlexGluck / @GoodNike / @rjapolov / @vantu5z (ru), @sicklylife-jp / @ryonakano / @nexryai (ja), @oltulu / @TeknoMobil / @daenney (tr), @sbadux / @kowalski7cc / @l3nn4rt (it), @OriginCode / @pan93412 (zh\_TW), @ojn (sv), @frandieguez (gl), @kuroehanako / @MarongHappy (ko)
+ 
+ 
+ ## 
