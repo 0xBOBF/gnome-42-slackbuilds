@@ -106,10 +106,7 @@ cd build
  --mandir=/usr/man \
  -Ddocdir=/usr/share/doc \
  --localstatedir=/var \
- -Dgtk_doc=false \
- -Dstatic_html_help=true \
- -Dintrospection=enabled \
- -Dmmap_buffer_backend=true
+ -Dgtk_doc=false
   "${NINJA:=ninja}" $NUMJOBS
   DESTDIR=$PKG $NINJA install
 cd ..
