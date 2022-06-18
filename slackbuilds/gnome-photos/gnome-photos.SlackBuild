@@ -90,6 +90,13 @@ find -L . \
 # these are provided as an example only.
 # Be sure to build only shared libraries unless there's some need for
 # static.
+# gnome-photos fails to build in a fresh build environment, complaining
+# that it doesn't recognize svg formats. Updating the pixbuf loaders
+# gets it working:
+if [ -x /usr/bin/update-gdk-pixbuf-loaders ]; then
+  /usr/bin/update-gdk-pixbuf-loaders
+fi
+
 mkdir build
 cd build
   CFLAGS="$SLKCFLAGS" \
