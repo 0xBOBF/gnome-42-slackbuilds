@@ -95,6 +95,7 @@ meson setup \
   --localstatedir=/var \
   --buildtype=release \
   -Ddocumentation=false \
+  -DIntrospection=true \
   .. || exit 1
   "${NINJA:=ninja}" $NUMJOBS || exit 1
   DESTDIR=$PKG $NINJA install || exit 1
