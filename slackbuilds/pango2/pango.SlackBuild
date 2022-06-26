@@ -23,7 +23,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PKGNAM=pango
-VERSION=${VERSION:-1.50.7}
+VERSION=${VERSION:-1.90.0}
 BUILD=${BUILD:-1}
 
 # Automatically determine the architecture we're building on:
@@ -94,7 +94,7 @@ meson setup \
   --sysconfdir=/etc \
   --localstatedir=/var \
   --buildtype=release \
-  -Dgtk_doc=false \
+  -Ddocumentation=false \
   .. || exit 1
   "${NINJA:=ninja}" $NUMJOBS || exit 1
   DESTDIR=$PKG $NINJA install || exit 1
