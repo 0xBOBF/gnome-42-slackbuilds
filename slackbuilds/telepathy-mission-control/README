@@ -1,0 +1,8 @@
+Telepathy Mission Control
+
+Mission Control-or MC for short-is a Telepathy component implementing
+both the Account Manager and Channel Dispatcher specifications. It
+stores your IM account settings, deals with talking to the relevant
+connection managers to bring accounts online where necessary, and
+dispatches incoming and outgoing communication channels to the
+relevant applications.
