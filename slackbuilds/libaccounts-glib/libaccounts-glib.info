@@ -1,0 +1,8 @@
+PRGNAM="libaccount-glib"
+VERSION="1.25"
+HOMEPAGE="https://gitlab.com/accounts-sso/libaccounts-glib"
+DOWNLOAD="https://gitlab.com/accounts-sso/libaccounts-glib/-/archive/1.25/libaccounts-glib-1.25.tar.gz"
+MD5SUM="d7642b8a1f795219aefd7aeda17687f2"
+REQUIRES=""
+MAINTAINER="Frank Honolka"
+EMAIL="slackernetuk@gmail.com"
