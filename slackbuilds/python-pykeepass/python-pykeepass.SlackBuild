@@ -82,11 +82,6 @@ find -L . \
 
 python3 setup.py install --root=$PKG
 
-# Rename executables to avoid conflicts with Python 2 version of pylint.
-#for executable in epylint pylint pyreverse symilar; do
-#  mv $PKG/usr/bin/${executable}{,3}
-#done
-
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
