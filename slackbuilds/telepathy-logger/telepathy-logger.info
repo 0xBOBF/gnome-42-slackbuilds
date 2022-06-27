@@ -1,0 +1,8 @@
+PRGNAM="telepathy-logger"
+VERSION="0.8.2"
+HOMEPAGE="https://telepathy.freedesktop.org"
+DOWNLOAD="https://telepathy.freedesktop.org/releases/telepathy-logger/telepathy-logger-0.8.2.tar.bz2"
+MD5SUM="c2f6a31c76cbdf8790500cf4f872ba71"
+REQUIRES="telepathy"
+MAINTAINER="Jay Lanagan"
+EMAIL="j@lngn.net"
