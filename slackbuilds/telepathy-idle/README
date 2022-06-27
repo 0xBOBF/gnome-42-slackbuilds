@@ -1,0 +1,5 @@
+telepathy-idle
+
+Telepathy Idle implements the Telepathy D-Bus specification for
+Internet Relay Chat, allowing Telepathy clients like empathy to
+connect to IRC servers.
