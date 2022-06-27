@@ -1,0 +1,17 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+              |-----handy-ruler--------------------------------------------------------------|
+telepathy-idle: telepathy-idle
+telepathy-idle:
+telepathy-idle: Telepathy Idle implements the Telepathy D-Bus specification for
+telepathy-idle: Internet Relay Chat, allowing Telepathy clients like empathy to
+telepathy-idle: connect to IRC servers.
+telepathy-idle:
+telepathy-idle:
+telepathy-idle: https://launchpad.net/telepathy-idle
+telepathy-idle:

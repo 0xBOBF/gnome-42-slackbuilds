@@ -1,0 +1,8 @@
+PRGNAM="telepathy-idle"
+VERSION="0.2.2"
+HOMEPAGE="https://telepathy.freedesktop.org"
+DOWNLOAD="https://telepathy.freedesktop.org/releases/telepathy-idle/telepathy-idle-0.2.2.tar.gz"
+MD5SUM="a2ecfaa76f5180359bcbc3caa66c5e55"
+REQUIRES=""
+MAINTAINER="Jay Lanagan"
+EMAIL="j@lngn.net"
