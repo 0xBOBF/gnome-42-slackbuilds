@@ -1,0 +1,8 @@
+PRGNAM="telepathy-mission-control"
+VERSION="5.16.6"
+HOMEPAGE="https://telepathy.freedesktop.org"
+DOWNLOAD="http://telepathy.freedesktop.org/releases/telepathy-mission-control/telepathy-mission-control-5.16.6.tar.gz"
+MD5SUM="911e990c7755eb98a8022223f649405d"
+REQUIRES=""
+MAINTAINER="Frank Honolka"
+EMAIL="slackernetuk@gmail.com"
