@@ -1,0 +1,11 @@
+polari
+
+GNOME IRC client which enables you to chat with people around world through
+large chatrooms or via private messaging.
+
+Requires: dbus-glib (-current)
+          dbus-test-runner
+          libaccounts-glib
+          telepathy-idle
+          telepathy-logger
+          telepathy-mission-control
