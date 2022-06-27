@@ -1,0 +1,4 @@
+libaccounts-glib
+
+Glib-based client library for accessing the online accounts
+database.
