@@ -1,8 +1,0 @@
-PRGNAM="dbus-test-runner"
-VERSION="19.04.0"
-HOMEPAGE="https://launchpad.net/dbus-test-runner"
-DOWNLOAD="https://launchpad.net/dbus-test-runner/19.04/19.04.0/+download/dbus-test-runner-19.04.0.tar.gz"
-MD5SUM="06032703be2a6daf09471f0f96c86e86"
-REQUIRES=""
-MAINTAINER="Frank Honolka"
-EMAIL="slackernetuk@gmail.com"
