@@ -1,3 +1,5 @@
 GNOME Clocks
 A simple clock application for GNOME. It includes world clocks, alarms,
 a stopwatch and a timer.
+
+REQUIRES: Vala updated 0.56.1 in order to build.
