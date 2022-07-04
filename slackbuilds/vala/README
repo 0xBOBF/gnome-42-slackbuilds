@@ -6,4 +6,5 @@ Vala uses the GObject type system and has additional code generation routines th
 GNOME stack simple. Vala has many other uses where native binaries are required.
 
 This is included in Slackware proper, but is not up to date, and causes applications to fail
-building unless the latest stable release is available (see: gnome-clocks for an example).
+building unless the latest stable release is available (see: gnome-clocks for an example). Also,
+Vala builds on Slackware 15.0 but seems to fail on -current currently. 
