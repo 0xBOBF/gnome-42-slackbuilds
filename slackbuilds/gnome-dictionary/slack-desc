@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+                |-----handy-ruler------------------------------------------------------|
+gnome-dictionary: GNOME Dictionary (application to look up words inonline dictionaries)
+gnome-dictionary:
+gnome-dictionary: GNOME Dictionary is a simple, clean, elegant application 
+gnome-dictionary: to look up words in online dictionaries using the DICT protocol.
+gnome-dictionary: 
+gnome-dictionary: 
+gnome-dictionary: 
+gnome-dictionary:
+gnome-dictionary: GNOME Dictionary
+gnome-dictionary: https://gitlab.gnome.org/GNOME/gnome-dictionary
+gnome-dictionary:

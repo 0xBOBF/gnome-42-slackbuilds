@@ -1,0 +1,5 @@
+ Dictionary is the GNOME application to look up definitions.
+
+ (this version is the updated version of gnome-dictionary-40.0 from github, thats why is master version. The officially 40.0 version from Gnome download page is not building because of a meson bug)
+
+ Gnome tips :/
