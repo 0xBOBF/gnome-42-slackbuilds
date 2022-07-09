@@ -1,0 +1,8 @@
+PRGNAM="Authenticator"
+VERSION="4.1.6"
+HOMEPAGE="https://apps.gnome.org/app/com.belmoussaoui.Authenticator/"
+DOWNLOAD="https://gitlab.gnome.org/World/Authenticator/-/archive/4.1.6/Authenticator-4.1.6.tar.gz"
+MD5SUM="0a151005004de50dd1c818809e5da044"
+REQUIRES="zbar"
+MAINTAINER="Jay Lanagan"
+EMAIL="j@lngn.net"
