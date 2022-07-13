@@ -26,10 +26,10 @@
 
 cd $(dirname $0) ; CWD=$(pwd)
 
-PRGNAM=five-or-more		# replace with name of program
-VERSION=${VERSION:-3.32.3}	# replace with version of program
+PRGNAM=five-or-more
+VERSION=${VERSION:-$(echo $PRGNAM-*.tar.?z | rev | cut -f 3- -d . | cut -f 1 -d - | rev)}
 BUILD=${BUILD:-1}
-TAG=${TAG:-_SBo}		# the "_SBo" is required
+TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}
 
 # Automatically determine the architecture we're building on:
