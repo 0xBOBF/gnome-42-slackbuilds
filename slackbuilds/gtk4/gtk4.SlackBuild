@@ -82,7 +82,7 @@ export CFLAGS="$SLKCFLAGS -DG_ENABLE_DEBUG"
 export CXXFLAGS="$SLKCFLAGS -DG_ENABLE_DEBUG"
 mkdir meson-build
 cd meson-build
-meson setup \
+unshare -n meson setup \
   --prefix=/usr \
   --libdir=lib${LIBDIRSUFFIX} \
   --libexecdir=/usr/libexec \
