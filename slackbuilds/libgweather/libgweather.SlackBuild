@@ -104,6 +104,7 @@ cd build
     -Dstrip=true \
     $OWPAPILINE \
     -Denable_vala=true \
+    -Dintrospection=true \
     -Dgtk_doc="$GTKDOC"
     
   "${NINJA:=ninja}"
