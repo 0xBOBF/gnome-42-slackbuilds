@@ -33,6 +33,8 @@ avahi
 geoclue2
 libgweather
 gnome-settings-daemon
+
+# Blocaled provides a stand-alone implementation of the localed D-Bus service.
 blocaled
 
 # Mutter compositor:
