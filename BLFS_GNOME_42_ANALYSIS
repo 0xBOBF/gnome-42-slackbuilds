@@ -76,7 +76,7 @@ brasero 3.12.3 - - 3.12.3                           # Done - SBo
 eog 42.0 - - -                                      # Done - gnome-42-slackbuilds
 gspell 1.10.0 - - 1.9.1                             # Done - SBo
 evince 42.2 - - 41.3                                # Done - slackware-current poppler 22.07.0
-seahorse 41.0 - - 3.18.0                            # Done - SBo (Using older version for now)
+seahorse 42.0 - - 3.18.0                            # Done - gnome-42-slackbuilds
 evolution 3.44.1 - - -                              # Done - gnome-42-slackbuilds
 file-roller 3.42 - - 3.36.2                         # Done - SBo (Using older version for now) 
 gtksourceview5 5.4.1                                # Done - SBo (Upgraded the SBo version from gtksourceview4 to gtksourceview5)
