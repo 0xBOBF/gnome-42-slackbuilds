@@ -1,0 +1,140 @@
+diff --git a/README.md b/README.md
+index 8f6a143de64be4e9a3d399abd8ba91b0bb403277..78130555076aeaf78c0d6d95d0cd78ea74e0862f 100644
+--- a/README.md
++++ b/README.md
+@@ -23,7 +23,6 @@ RUNTIME DEPENDENCIES
+   - gnome-desktop (>= 3.30)
+   - libhandy (>= 1.0)
+   - libsoup
+-  - libnotify
+   - Pango
+ 
+ * GSettings Schemas from:
+diff --git a/data/org.gnome.tweaks.desktop.in b/data/org.gnome.tweaks.desktop.in
+index b23218021736dabb007dc5714555dd746ba8333c..00de21c3660ef865aaf35b4bbd1f4138895d29fa 100644
+--- a/data/org.gnome.tweaks.desktop.in
++++ b/data/org.gnome.tweaks.desktop.in
+@@ -12,3 +12,4 @@ Categories=GNOME;GTK;Utility;
+ # Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+ Keywords=Settings;Advanced;Preferences;Fonts;Theme;XKB;Keyboard;Typing;
+ OnlyShowIn=GNOME;Unity;Pantheon;
++X-GNOME-UsesNotifications=true
+diff --git a/gtweak/app.py b/gtweak/app.py
+index 78334cdd0e244e9ab4e6bb85485cabfc81ca6d5f..e037469e9673dea3af8cc5254424030011632951 100644
+--- a/gtweak/app.py
++++ b/gtweak/app.py
+@@ -74,10 +74,24 @@ class GnomeTweaks(Gtk.Application):
+         about_action.connect("activate", self.about_cb)
+         self.add_action(about_action)
+ 
++        restart_action = Gio.SimpleAction.new("restart-session", None)
++        restart_action.connect("activate", self._restart_session_cb)
++        self.add_action(restart_action)
++
+         # Opt in to dark mode.
+         style_manager = Handy.StyleManager.get_default()
+         style_manager.set_color_scheme(Handy.ColorScheme.PREFER_LIGHT)
+ 
++    def _restart_session_cb(self, _action, _pspec):
++        d = Gio.bus_get_sync(Gio.BusType.SESSION, None)
++        proxy = Gio.DBusProxy.new_sync(
++                       d, Gio.DBusProxyFlags.NONE, None,
++                       'org.gnome.SessionManager',
++                       '/org/gnome/SessionManager',
++                       'org.gnome.SessionManager',
++                       None)
++        proxy.Logout('(u)', 0)
++
+     def reset_cb(self, action, parameter):
+         dialog = Gtk.MessageDialog(self.win, 0, Gtk.MessageType.QUESTION,
+                                    Gtk.ButtonsType.OK_CANCEL, _("Reset to Defaults"))
+diff --git a/gtweak/tweakmodel.py b/gtweak/tweakmodel.py
+index 04d079c59e889ab507e91922df5d96d4812d8fa5..ded1072db3fbc9ec266492db4b75ca02d3cfb3d7 100644
+--- a/gtweak/tweakmodel.py
++++ b/gtweak/tweakmodel.py
+@@ -48,7 +48,7 @@ class Tweak(object):
+         self._logoutnotification = LogoutNotification()
+ 
+     def notify_information(self, summary, desc=""):
+-        self._notification = Notification(summary, desc)
++        Notification(summary, desc)
+ 
+ 
+ class TweakGroup(object):
+diff --git a/gtweak/utils.py b/gtweak/utils.py
+index 1dadbbcadd242fbea2a2479cf38b9410a1cb55ed..aba2fd9d80334022bd9b94ad952344ffb78fe681 100644
+--- a/gtweak/utils.py
++++ b/gtweak/utils.py
+@@ -12,11 +12,9 @@ import itertools
+ import logging
+ 
+ import gi
+-gi.require_version("Notify", "0.7")
+ from gi.repository import GObject
+ from gi.repository import GLib
+ from gi.repository import Gio
+-from gi.repository import Notify
+ 
+ import gtweak
+ from gtweak.gsettings import GSettingsSetting
+@@ -323,45 +321,22 @@ class XSettingsOverrides:
+ 
+ class Notification:
+     def __init__(self, summary, body):
+-        if Notify.is_initted() or Notify.init(_("GNOME Tweaks")):
+-            self.notification = Notify.Notification.new(
+-                                    summary,
+-                                    body,
+-                                    'gnome-tweaks'
+-            )
+-            self.notification.set_hint(
+-                                "desktop-entry",
+-                                GLib.Variant('s', gtweak.APP_ID))
+-            self.notification.show()
+-        else:
+-            raise Exception("Not Supported")
++        app = Gio.Application.get_default()
++        notification = Gio.Notification()
++        notification.set_title(summary)
++        notification.set_body(body)
++        app.send_notification(None, notification)
+ 
+ 
+-@singleton
+ class LogoutNotification:
+     def __init__(self):
+-        if Notify.is_initted() or Notify.init(_("GNOME Tweaks")):
+-            self.notification = Notify.Notification.new(
+-                                _("Configuration changes require restart"),
+-                                _("Your session needs to be restarted for settings to take effect"),
+-                                'gnome-tweaks')
+-            self.notification.add_action(
+-                                "restart",
+-                                _("Restart Session"),
+-                                self._logout, None, None)
+-            self.notification.set_hint(
+-                                "desktop-entry",
+-                                GLib.Variant('s', gtweak.APP_ID))
+-            self.notification.show()
+-        else:
+-            raise Exception("Not Supported")
+-
+-    def _logout(self, btn, action, user_data, unknown):
+-        d = Gio.bus_get_sync(Gio.BusType.SESSION, None)
+-        proxy = Gio.DBusProxy.new_sync(
+-                       d, Gio.DBusProxyFlags.NONE, None,
+-                       'org.gnome.SessionManager',
+-                       '/org/gnome/SessionManager',
+-                       'org.gnome.SessionManager',
+-                       None)
+-        proxy.Logout('(u)', 0)
++        app = Gio.Application.get_default()
++        notification = Gio.Notification()
++        notification.set_title(
++            _("Configuration changes require restart"),
++        )
++        notification.set_body(
++            _("Your session needs to be restarted for settings to take effect")
++        )
++        notification.add_button(_("Restart Session"), "app.restart-session")
++        app.send_notification(None, notification)
